@@ -18,6 +18,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="res\ball.png" />
+    <Content Include="res\ball.wav" />
+    <Content Include="res\kitten.png" />
+    <Content Include="res\PngSuite.png" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +32,9 @@
     <TypeScriptCompile Include="Renderer.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="res\ATTRIBUTION" />
+    <Content Include="res\DejaVuSans.ttf" />
+    <Content Include="res\PowerChorus2.ogg" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

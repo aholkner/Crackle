@@ -1,6 +1,7 @@
 ﻿/// <reference path="Renderer.ts" />
 /// <reference path="CanvasRenderer.ts" />
 /// <reference path="Game.ts" />
+/// <reference path="Graphics.ts" />
 
 module bacon {
 
@@ -11,9 +12,12 @@ module bacon {
 
 }
 
+var img = new bacon.Image('res/kitten.png')
+
 class Game extends bacon.Game {
     public onTick() {
         bacon.clear(255, 0, 0, 255)
+        bacon.drawImage(img, 0, 0, 100, 100)
     }
 }
 

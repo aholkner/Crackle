@@ -28,5 +28,9 @@ module bacon {
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
             this.ctx.fillStyle = restoreFillStyle
         }
+
+        public drawImage(img: HTMLImageElement, x1: number, y1: number, x2: number, y2: number) {
+            this.ctx.drawImage(img, x1, y1)
+        }
     }
 }
