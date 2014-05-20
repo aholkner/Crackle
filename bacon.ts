@@ -10,19 +10,6 @@ module bacon {
             renderer = new CanvasRenderer()
     }
 
+    export var timestep: number = 0.016 // TODO
+
 }
-
-var img = new bacon.Image('res/kitten.png')
-
-class Game extends bacon.Game {
-    public onTick() {
-        bacon.clear(255, 0, 0, 255)
-        bacon.drawImage(img, 0, 0, 100, 100)
-    }
-}
-
-window.onload = () => {
-    var el = document.getElementById('content');
-    var game = new Game(el);
-    game.run();
-};

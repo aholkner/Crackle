@@ -6,7 +6,7 @@ module bacon {
         element: HTMLElement;
         canvas: HTMLCanvasElement;
 
-        width: number;
+        width: number;  // TODO belongs in window?
         height; number;
 
         constructor(element: HTMLElement) {
@@ -14,6 +14,8 @@ module bacon {
 
             this.element = element;
             this.canvas = document.createElement("canvas");
+            this.canvas.width = element.offsetWidth
+            this.canvas.height = element.offsetHeight
             this.element.appendChild(this.canvas);
 
             this.width = this.canvas.width;
