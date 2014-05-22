@@ -65,8 +65,8 @@ class Game extends crackle.Game {
 }
 
 var game: Game;
-window.onload = () => {
-    var el = document.getElementById('content');
-    game = new Game(el);
-    game.run();
-};
+//window.onload = () => {
+//    var el = document.getElementById('content');
+//    game = new Game(el);
+//    game.run();
+//};
