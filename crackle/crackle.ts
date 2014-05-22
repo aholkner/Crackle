@@ -5,9 +5,9 @@
             renderer = new CanvasRenderer()
     }
 
-    export var timestep: number = 0.016 // TODO
+    export var timestep: number = 0
 
-    function getValueByPath(o, s) {
+    function getValueByPath(o: any, s: string) {
         s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
         s = s.replace(/^\./, '');           // strip a leading dot
         var a = s.split('.');

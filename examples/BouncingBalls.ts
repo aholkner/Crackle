@@ -69,8 +69,3 @@ module Examples.BouncingBalls {
         }
     }
 }
-//window.onload = () => {
-//    var el = document.getElementById('content');
-//    game = new Game(el);
-//    game.run();
-//};

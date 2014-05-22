@@ -4,6 +4,7 @@
         element: HTMLElement
         canvas: HTMLCanvasElement
 
+        lastTimestamp: number = -1
         width: number
         height: number
 
@@ -28,16 +29,24 @@
             ResourceQueue.pop()
         }
 
-        private onAnimationFrame() {
+        private onAnimationFrame(timestamp: number) {
+            // Update crackle.timestep
+            if (this.lastTimestamp > 0)
+                crackle.timestep = (timestamp - this.lastTimestamp) / 1000.0 // ms to secs
+            this.lastTimestamp = timestamp
+
+            // Render frame
             renderer.beginFrame(this.canvas)
             this.onTick()
             renderer.endFrame()
-            window.requestAnimationFrame(() => { this.onAnimationFrame() })
+
+            // Request next frame
+            window.requestAnimationFrame((timestamp) => { this.onAnimationFrame(timestamp) })
         }
 
         private onLoadComplete() {
             this.onInit()
-            window.requestAnimationFrame(() => { this.onAnimationFrame() })
+            window.requestAnimationFrame((timestamp) => { this.onAnimationFrame(timestamp) })
         }
 
         public onLoad() {
