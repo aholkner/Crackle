@@ -31,14 +31,6 @@
         }
     }
 
-    export class Font {
-        specifier: string
-
-        constructor(specifier: string) {
-            this.specifier = specifier
-        }
-    }
-
     export function setColor(r: number, g: number, b: number, a: number) {
         renderer.setColor(r, g, b, a)
     }

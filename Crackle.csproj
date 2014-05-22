@@ -27,6 +27,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="crackle\crackle.ts" />
     <TypeScriptCompile Include="crackle\CanvasRenderer.ts" />
+    <TypeScriptCompile Include="crackle\Font.ts" />
     <TypeScriptCompile Include="crackle\Game.ts" />
     <TypeScriptCompile Include="crackle\Graphics.ts" />
     <TypeScriptCompile Include="crackle\Renderer.ts" />
