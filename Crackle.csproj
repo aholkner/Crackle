@@ -32,6 +32,7 @@
     <TypeScriptCompile Include="crackle\Renderer.ts" />
     <TypeScriptCompile Include="crackle\ResourceQueue.ts" />
     <TypeScriptCompile Include="examples\BouncingBalls.ts" />
+    <TypeScriptCompile Include="examples\Font.ts" />
     <TypeScriptCompile Include="examples\SampleNearest.ts" />
   </ItemGroup>
   <ItemGroup>

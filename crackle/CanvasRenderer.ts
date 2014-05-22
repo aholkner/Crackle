@@ -80,5 +80,10 @@
             this.ctxExtensions.setImageSmoothingEnabled(this.ctx, !image.params.sampleNearest)
             this.ctx.drawImage(image.img, x1, y1, x2 - x1, y2 - y1)
         }
+
+        public drawString(font: Font, text: string, x: number, y: number) {
+            this.ctx.font = font.specifier
+            this.ctx.fillText(text, x, y)
+        }
     }
 }

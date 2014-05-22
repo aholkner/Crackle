@@ -15,7 +15,9 @@
         }
 
         static pop() {
-            ResourceQueue.instances.pop()
+            var resourceQueue = ResourceQueue.instances.pop()
+            if (resourceQueue.loadCount == 0)
+                resourceQueue.loadCompleteCallback()
         }
 
         static get current(): ResourceQueue {

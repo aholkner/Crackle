@@ -31,6 +31,14 @@
         }
     }
 
+    export class Font {
+        specifier: string
+
+        constructor(specifier: string) {
+            this.specifier = specifier
+        }
+    }
+
     export function setColor(r: number, g: number, b: number, a: number) {
         renderer.setColor(r, g, b, a)
     }
@@ -45,5 +53,9 @@
         if (y2 == null)
             y2 = y1 + img.height
         renderer.drawImage(img, x1, y1, x2, y2)
+    }
+
+    export function drawString(font: Font, text: string, x: number, y: number) {
+        renderer.drawString(font, text, x, y)
     }
 } 
