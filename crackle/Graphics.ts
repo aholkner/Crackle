@@ -12,7 +12,7 @@
         };
 
         constructor(path: string, params?: ImageParameters) {
-            this.img = Resources.loadImage(path)
+            this.img = ResourceQueue.current.loadImage(path)
             if (params == null)
                 params = Image.defaultParams
             this.params = params

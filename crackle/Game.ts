@@ -1,18 +1,16 @@
 ﻿module crackle {
 
     export class Game {
-        static instance: Game
-        
         element: HTMLElement
         canvas: HTMLCanvasElement
 
-        width: number  // TODO belongs in window?
+        width: number
         height: number
+
+        resourceQueue: ResourceQueue
         
         constructor(element: HTMLElement) {
             init()
-
-            Game.instance = this
 
             this.element = element
             this.canvas = document.createElement("canvas")
@@ -25,8 +23,9 @@
         }
 
         run() {
+            ResourceQueue.push(new ResourceQueue(() => { this.onLoadComplete() }))
             this.onLoad()
-            Resources.completeLoad(() => { this.onLoadComplete() })
+            ResourceQueue.pop()
         }
 
         private onAnimationFrame() {
