@@ -21,9 +21,11 @@ module bacon {
             this.width = this.canvas.width;
             this.height = this.canvas.height;
         }
+               
 
         run() {
-            window.requestAnimationFrame(() => { this.onAnimationFrame() })
+            this.onLoad()
+            Resources.completeLoad(() => { this.onLoadComplete() })
         }
 
         private onAnimationFrame() {
@@ -31,6 +33,19 @@ module bacon {
             this.onTick()
             renderer.endFrame()
             window.requestAnimationFrame(() => { this.onAnimationFrame() })
+        }
+
+        private onLoadComplete() {
+            this.onInit()
+            window.requestAnimationFrame(() => { this.onAnimationFrame() })
+        }
+
+        public onLoad() {
+            // Subclass should load required assets here
+        }
+
+        public onInit() {
+            // Subclass should init here; all assets have loaded
         }
 
         public onTick() {

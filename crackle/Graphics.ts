@@ -1,4 +1,5 @@
 ﻿/// <reference path="Renderer.ts" />
+/// <reference path="Resources.ts" />
 
 module bacon {
 
@@ -14,8 +15,19 @@ module bacon {
         img: HTMLImageElement;
 
         constructor(path: string) {
-            this.img = document.createElement('img')
-            this.img.src = path
+            this.img = Resources.loadImage(path)
+        }
+
+        get width(): number {
+            if (this.img.width == 0)
+                throw new ResourceNotLoadedException(this.img.src)
+            return this.img.width
+        }
+
+        get height(): number {
+            if (this.img.height == 0)
+                throw new ResourceNotLoadedException(this.img.src)
+            return this.img.height
         }
     }
 

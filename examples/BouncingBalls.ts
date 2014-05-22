@@ -1,44 +1,38 @@
 /// <reference path="../crackle/crackle.ts" />
 
-var ballImage = new bacon.Image('examples/res/ball.png')
+var ballImage: bacon.Image;
 var game: bacon.Game;
 
 class Ball {
-    //width = ball_image.width
-    //height = ball_image.height
-    width: number
-    height: number
+    static width: number
+    static height: number
     x: number
     y: number
     dx: number
     dy: number
 
     constructor() {
-    	// TODO
-    	this.width = 32
-    	this.height = 32
-
-    	this.x = Math.random() * game.width - this.width
-    	this.y = Math.random() * game.height- this.height
+        this.x = Math.random() * game.width - Ball.width
+    	this.y = Math.random() * game.height - Ball.height
 
     	this.dx = (Math.random() - 0.5) * 1000
         this.dy = (Math.random() - 0.5) * 1000
     }
 
     update(dt) {
-    	if (this.x <= 0 || this.x + this.width >= game.width) {
+        if (this.x <= 0 || this.x + Ball.width >= game.width) {
             this.dx *= -1
             this.onBounce()
         }
-        if (this.y <= 0 || this.y + this.height >= game.height) {
+        if (this.y <= 0 || this.y + Ball.height >= game.height) {
             this.dy *= -1
             this.onBounce()
         }
         this.x += this.dx * dt
         this.y += this.dy * dt
 
-        this.x = Math.min(Math.max(this.x, 0), game.width - this.width)
-        this.y = Math.min(Math.max(this.y, 0), game.height - this.height)
+        this.x = Math.min(Math.max(this.x, 0), game.width - Ball.width)
+        this.y = Math.min(Math.max(this.y, 0), game.height - Ball.height)
     }
     
     onBounce() {
@@ -51,6 +45,17 @@ class Ball {
 var balls = new Array();
 
 class Game extends bacon.Game {
+    public onLoad() {
+        ballImage = new bacon.Image('examples/res/ball.png')
+    }
+
+    public onInit() {
+        Ball.width = ballImage.width
+        Ball.height = ballImage.height
+        for (var i = 0; i < 100; ++i)
+            balls.push(new Ball())
+    }
+
     public onTick() {
         bacon.clear(0, 0, 0, 255)
         bacon.setColor(1, 1, 1, 1)
@@ -65,9 +70,5 @@ class Game extends bacon.Game {
 window.onload = () => {
     var el = document.getElementById('content');
     game = new Game(el);
-
-    for (var i = 0; i < 100; ++i)
-    	balls.push(new Ball())
-
     game.run();
 };

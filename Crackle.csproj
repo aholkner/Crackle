@@ -30,6 +30,7 @@
     <TypeScriptCompile Include="crackle\Game.ts" />
     <TypeScriptCompile Include="crackle\Graphics.ts" />
     <TypeScriptCompile Include="crackle\Renderer.ts" />
+    <TypeScriptCompile Include="crackle\Resources.ts" />
     <TypeScriptCompile Include="examples\BouncingBalls.ts" />
   </ItemGroup>
   <ItemGroup>
