@@ -6,7 +6,7 @@
 
         width: number;  // TODO belongs in window?
         height; number;
-
+        
         constructor(element: HTMLElement) {
             init()
 
@@ -19,7 +19,6 @@
             this.width = this.canvas.width;
             this.height = this.canvas.height;
         }
-               
 
         run() {
             this.onLoad()

@@ -1,13 +1,5 @@
 ﻿module crackle {
 
-    export function setColor(r: number, g: number, b: number, a: number) {
-        renderer.setColor(r, g, b, a)
-    }
-
-    export function clear(r: number, g: number, b: number, a: number) {
-        renderer.clear(r, g, b, a)
-    }
-
     export class Image {
         img: HTMLImageElement;
 
@@ -28,7 +20,19 @@
         }
     }
 
-    export function drawImage(img: Image, x1: number, y1: number, x2: number, y2: number) {
+    export function setColor(r: number, g: number, b: number, a: number) {
+        renderer.setColor(r, g, b, a)
+    }
+
+    export function clear(r: number, g: number, b: number, a: number) {
+        renderer.clear(r, g, b, a)
+    }
+
+    export function drawImage(img: Image, x1: number, y1: number, x2?: number, y2?: number) {
+        if (x2 == null)
+            x2 = x1 + img.width
+        if (y2 == null)
+            y2 = y1 + img.height
         renderer.drawImage(img.img, x1, y1, x2, y2)
     }
 } 

@@ -1,5 +1,4 @@
 var ballImage: crackle.Image;
-var game: crackle.Game;
 
 class Ball {
     static width: number
@@ -60,11 +59,12 @@ class Game extends crackle.Game {
         for (var i = 0; i < balls.length; ++i) {
         	var ball = balls[i];
         	ball.update(crackle.timestep)
-        	crackle.drawImage(ballImage, ball.x, ball.y, ball.x + 32, ball.y + 32)
+        	crackle.drawImage(ballImage, ball.x, ball.y)
         }
     }
 }
 
+var game: Game;
 window.onload = () => {
     var el = document.getElementById('content');
     game = new Game(el);

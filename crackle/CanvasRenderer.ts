@@ -28,8 +28,7 @@
         }
 
         public drawImage(img: HTMLImageElement, x1: number, y1: number, x2: number, y2: number) {
-            if (img.width > 0)
-                this.ctx.drawImage(img, x1, y1)
+            this.ctx.drawImage(img, x1, y1, x2 - x1, y2 - y1)
         }
     }
 }
