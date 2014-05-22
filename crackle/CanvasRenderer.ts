@@ -5,6 +5,8 @@
         canvas: HTMLCanvasElement;
         ctx: CanvasRenderingContext2D;
 
+        private sampleNearest: boolean = false;
+
         public beginFrame(canvas: HTMLCanvasElement) {
             this.canvas = canvas;
             this.ctx = canvas.getContext('2d');
@@ -27,8 +29,9 @@
             this.ctx.fillStyle = restoreFillStyle
         }
 
-        public drawImage(img: HTMLImageElement, x1: number, y1: number, x2: number, y2: number) {
-            this.ctx.drawImage(img, x1, y1, x2 - x1, y2 - y1)
+        public drawImage(image: Image, x1: number, y1: number, x2: number, y2: number) {
+            this.ctx.msImageSmoothingEnabled = !image.params.sampleNearest
+            this.ctx.drawImage(image.img, x1, y1, x2 - x1, y2 - y1)
         }
     }
 }

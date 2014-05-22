@@ -1,10 +1,21 @@
 ﻿module crackle {
 
+    export interface ImageParameters {
+        sampleNearest: boolean
+    }
+
     export class Image {
         img: HTMLImageElement;
+        params: ImageParameters;
+        private static defaultParams = {
+            sampleNearest: false
+        };
 
-        constructor(path: string) {
+        constructor(path: string, params?: ImageParameters) {
             this.img = Resources.loadImage(path)
+            if (params == null)
+                params = Image.defaultParams
+            this.params = params
         }
 
         get width(): number {
@@ -33,6 +44,6 @@
             x2 = x1 + img.width
         if (y2 == null)
             y2 = y1 + img.height
-        renderer.drawImage(img.img, x1, y1, x2, y2)
+        renderer.drawImage(img, x1, y1, x2, y2)
     }
 } 
