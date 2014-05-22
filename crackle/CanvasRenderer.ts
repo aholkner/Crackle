@@ -1,6 +1,4 @@
-﻿/// <reference path="Renderer.ts" />
-
-module bacon {
+﻿module crackle {
 
     export class CanvasRenderer implements Renderer {
 

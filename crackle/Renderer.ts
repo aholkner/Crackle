@@ -1,4 +1,4 @@
-﻿module bacon {
+﻿module crackle {
 
     export interface Renderer {
         beginFrame(canvas: HTMLCanvasElement)

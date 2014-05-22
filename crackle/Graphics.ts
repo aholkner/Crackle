@@ -1,7 +1,4 @@
-﻿/// <reference path="Renderer.ts" />
-/// <reference path="Resources.ts" />
-
-module bacon {
+﻿module crackle {
 
     export function setColor(r: number, g: number, b: number, a: number) {
         renderer.setColor(r, g, b, a)

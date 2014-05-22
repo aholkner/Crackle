@@ -1,9 +1,4 @@
-﻿/// <reference path="Renderer.ts" />
-/// <reference path="CanvasRenderer.ts" />
-/// <reference path="Game.ts" />
-/// <reference path="Graphics.ts" />
-
-module bacon {
+﻿module crackle {
 
     export function init() {
         if (renderer == null)

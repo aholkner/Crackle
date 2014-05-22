@@ -1,7 +1,5 @@
-/// <reference path="../crackle/crackle.ts" />
-
-var ballImage: bacon.Image;
-var game: bacon.Game;
+var ballImage: crackle.Image;
+var game: crackle.Game;
 
 class Ball {
     static width: number
@@ -36,7 +34,7 @@ class Ball {
     }
     
     onBounce() {
-        //pan = self.x / float(bacon.window.width - self.width) * 2 - 1
+        //pan = self.x / float(crackle.window.width - self.width) * 2 - 1
         //pitch = 0.9 + random.random() * 0.2
         //ball_sound.play(gain=0.1, pan=pan, pitch=pitch)
     }
@@ -44,9 +42,9 @@ class Ball {
 
 var balls = new Array();
 
-class Game extends bacon.Game {
+class Game extends crackle.Game {
     public onLoad() {
-        ballImage = new bacon.Image('examples/res/ball.png')
+        ballImage = new crackle.Image('examples/res/ball.png')
     }
 
     public onInit() {
@@ -57,12 +55,12 @@ class Game extends bacon.Game {
     }
 
     public onTick() {
-        bacon.clear(0, 0, 0, 255)
-        bacon.setColor(1, 1, 1, 1)
+        crackle.clear(0, 0, 0, 255)
+        crackle.setColor(1, 1, 1, 1)
         for (var i = 0; i < balls.length; ++i) {
         	var ball = balls[i];
-        	ball.update(bacon.timestep)
-        	bacon.drawImage(ballImage, ball.x, ball.y, ball.x + 32, ball.y + 32)
+        	ball.update(crackle.timestep)
+        	crackle.drawImage(ballImage, ball.x, ball.y, ball.x + 32, ball.y + 32)
         }
     }
 }

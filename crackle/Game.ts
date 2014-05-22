@@ -1,6 +1,4 @@
-﻿/// <reference path="crackle.ts" />
-
-module bacon {
+﻿module crackle {
 
     export class Game {
         element: HTMLElement;
