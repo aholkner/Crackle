@@ -1,6 +1,6 @@
-/// <reference path="../bacon.ts" />
+/// <reference path="../crackle/crackle.ts" />
 
-var ballImage = new bacon.Image('res/ball.png')
+var ballImage = new bacon.Image('examples/res/ball.png')
 var game: bacon.Game;
 
 class Ball {

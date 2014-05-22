@@ -30,7 +30,8 @@ module bacon {
         }
 
         public drawImage(img: HTMLImageElement, x1: number, y1: number, x2: number, y2: number) {
-            this.ctx.drawImage(img, x1, y1)
+            if (img.width > 0)
+                this.ctx.drawImage(img, x1, y1)
         }
     }
 }

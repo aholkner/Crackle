@@ -18,23 +18,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="res\ball.png" />
-    <Content Include="res\ball.wav" />
-    <Content Include="res\kitten.png" />
-    <Content Include="res\PngSuite.png" />
+    <Content Include="examples\res\ball.png" />
+    <Content Include="examples\res\ball.wav" />
+    <Content Include="examples\res\kitten.png" />
+    <Content Include="examples\res\PngSuite.png" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="bacon.ts" />
-    <TypeScriptCompile Include="CanvasRenderer.ts" />
-    <TypeScriptCompile Include="Game.ts" />
-    <TypeScriptCompile Include="Graphics.ts" />
-    <TypeScriptCompile Include="Renderer.ts" />
+    <TypeScriptCompile Include="crackle\crackle.ts" />
+    <TypeScriptCompile Include="crackle\CanvasRenderer.ts" />
+    <TypeScriptCompile Include="crackle\Game.ts" />
+    <TypeScriptCompile Include="crackle\Graphics.ts" />
+    <TypeScriptCompile Include="crackle\Renderer.ts" />
+    <TypeScriptCompile Include="examples\BouncingBalls.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="res\ATTRIBUTION" />
-    <Content Include="res\DejaVuSans.ttf" />
-    <Content Include="res\PowerChorus2.ogg" />
+    <Content Include="examples\res\ATTRIBUTION" />
+    <Content Include="examples\res\DejaVuSans.ttf" />
+    <Content Include="examples\res\PowerChorus2.ogg" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -73,8 +74,8 @@
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
-    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
-    <TypeScriptOutFile>bacon.js</TypeScriptOutFile>
+    <TypeScriptModuleKind>none</TypeScriptModuleKind>
+    <TypeScriptOutFile>crackle.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
