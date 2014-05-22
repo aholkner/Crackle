@@ -1,23 +1,27 @@
 ﻿module crackle {
 
     export class Game {
-        element: HTMLElement;
-        canvas: HTMLCanvasElement;
+        static instance: Game
+        
+        element: HTMLElement
+        canvas: HTMLCanvasElement
 
-        width: number;  // TODO belongs in window?
-        height; number;
+        width: number  // TODO belongs in window?
+        height: number
         
         constructor(element: HTMLElement) {
             init()
 
-            this.element = element;
-            this.canvas = document.createElement("canvas");
+            Game.instance = this
+
+            this.element = element
+            this.canvas = document.createElement("canvas")
             this.canvas.width = element.offsetWidth
             this.canvas.height = element.offsetHeight
-            this.element.appendChild(this.canvas);
+            this.element.appendChild(this.canvas)
 
-            this.width = this.canvas.width;
-            this.height = this.canvas.height;
+            this.width = this.canvas.width
+            this.height = this.canvas.height
         }
 
         run() {

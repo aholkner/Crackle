@@ -19,8 +19,8 @@ module Examples.SampleNearest {
     }
 }
 
-window.onload = () => {
-    var el = document.getElementById('content');
-    var game = new Examples.SampleNearest.Game(el);
-    game.run();
-}; 
+//window.onload = () => {
+//    var el = document.getElementById('content');
+//    var game = new Examples.SampleNearest.Game(el);
+//    game.run();
+//}; 
