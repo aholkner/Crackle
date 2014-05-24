@@ -26,6 +26,12 @@
             return null
         }
 
+        private decrementLoadCount() {
+            this.loadCount -= 1
+            if (this.loadCount == 0)
+                this.loadCompleteCallback()
+        }
+
         loadImage(path: string): HTMLImageElement {
             var img = document.createElement('img')
             this.loadCount += 1
@@ -36,14 +42,26 @@
         }
 
         private onImageLoaded(img: HTMLImageElement) {
-            this.loadCount -= 1
-            if (this.loadCount == 0)
-                this.loadCompleteCallback()
+            this.decrementLoadCount()
         }
 
         private onImageError(img: HTMLImageElement) {
             // TODO
             throw new ResourceNotLoadedException(img.src)
+        }
+
+        loadFont(font: Font) {
+            if (!font.isLoaded) {
+                this.loadCount += 1
+                window.setTimeout(() => { this.pollFontLoaded(font) }, 100)
+            }
+        }
+
+        private pollFontLoaded(font) {
+            if (font.isLoaded)
+                this.decrementLoadCount()
+            else
+                window.setTimeout(() => { this.pollFontLoaded(font) }, 100)
         }
     }
 

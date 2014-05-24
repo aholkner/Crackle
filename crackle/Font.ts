@@ -38,12 +38,42 @@
         ascent: number
         descent: number
 
-        constructor(specifier: string) {
-            this.specifier = specifier
+        constructor(public name: string, public size: number) {
+            this.specifier = size + 'pt "' + name + '"'
+            ResourceQueue.current.loadFont(this)
+        }
 
-            var cssMetrics = new CSSFontMetrics(specifier)
+        public calculateMetrics() {
+            var cssMetrics = new CSSFontMetrics(this.specifier)
             this.ascent = cssMetrics.ascent
             this.descent = cssMetrics.descent
+        }
+
+        // Create a hidden DOM node temporarily to measure a dummy string with the given
+        // font family
+        private static measureCSSFontWidth(fontFamily: string) {
+            var div = document.createElement('div')
+            div.style.visibility = 'hidden'
+            div.style.fontFamily = fontFamily
+            div.style.fontSize = '96pt'
+            
+            var span = document.createElement('span')
+            span.appendChild(document.createTextNode('wi.'))
+            div.appendChild(span)
+
+            var body = document.getElementsByTagName('body')[0]
+            body.appendChild(div)
+
+            var width = span.offsetWidth
+            body.removeChild(div)
+            return width
+        }
+
+        // Compare DOM render of this font compared to a fallback; returns true if the metrics are different
+        // and therefore the font has loaded
+        public get isLoaded(): boolean {
+            return Font.measureCSSFontWidth('"' + this.name + '",monospace') != Font.measureCSSFontWidth('monospace') ||
+                   Font.measureCSSFontWidth('"' + this.name + '",serif') != Font.measureCSSFontWidth('serif')
         }
     }
 

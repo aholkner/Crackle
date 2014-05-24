@@ -4,7 +4,7 @@
         font: crackle.Font
 
         public onLoad() {
-            this.font = new crackle.Font('24pt monospace')
+            this.font = new crackle.Font('tinyfont', 24)
         }
 
         public onTick() {
