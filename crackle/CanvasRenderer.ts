@@ -76,14 +76,9 @@
             this.ctx.fillStyle = restoreFillStyle
         }
 
-        public drawImage(image: Image, x1: number, y1: number, x2: number, y2: number) {
+        public drawImageRegion(image: Image, x: number, y: number, width: number, height: number, sx: number, sy: number, swidth: number, sheight: number) {
             this.ctxExtensions.setImageSmoothingEnabled(this.ctx, !image.params.sampleNearest)
-            this.ctx.drawImage(image.img, x1, y1, x2 - x1, y2 - y1)
-        }
-
-        public drawImageRegion(image: Image, x1: number, y1: number, x2: number, y2: number, ix1: number, iy1: number, ix2: number, iy2: number) {
-            this.ctxExtensions.setImageSmoothingEnabled(this.ctx, !image.params.sampleNearest)
-            this.ctx.drawImage(image.img, ix1, iy1, ix2 - ix1, iy2 - iy1, x1, y1, x2 - x1, y2 - y1)
+            this.ctx.drawImage(image.img, sx, sy, swidth, sheight, x, y, width, height)
         }
 
         public drawString(font: Font, text: string, x: number, y: number) {

@@ -6,28 +6,55 @@
     
     export class Image {
         img: HTMLImageElement;
+        x1: number = 0
+        y1: number = 0
+        x2: number = NaN
+        y2: number = NaN
+
         params: ImageParameters;
         private static defaultParams = {
             sampleNearest: false
         };
 
         constructor(path: string, params?: ImageParameters) {
-            this.img = ResourceQueue.current.loadImage(path)
+            if (path != null)
+                this.img = ResourceQueue.current.loadImage(this, path)
             if (params == null)
                 params = Image.defaultParams
             this.params = params
         }
 
+        onLoaded() {
+            this.x2 = this.img.width
+            this.y2 = this.img.height
+        }
+
+        get isLoaded(): boolean {
+            return !isNaN(this.x2)
+        }
+
         get width(): number {
-            if (this.img.width == 0)
+            if (!this.isLoaded)
                 throw new ResourceNotLoadedException(this.img.src)
-            return this.img.width
+
+            return this.x2 - this.x1
         }
 
         get height(): number {
-            if (this.img.height == 0)
+            if (!this.isLoaded)
                 throw new ResourceNotLoadedException(this.img.src)
-            return this.img.height
+
+            return this.y2 - this.y1
+        }
+
+        getRegion(x1: number, y1: number, x2: number, y2: number): Image {
+            var region = new Image(null, this.params)
+            region.img = this.img
+            region.x1 = this.x1 + x1
+            region.y1 = this.y1 + y1
+            region.x2 = this.x1 + x2
+            region.y2 = this.y1 + y2
+            return region
         }
     }
 
@@ -40,15 +67,20 @@
     }
 
     export function drawImage(img: Image, x1: number, y1: number, x2?: number, y2?: number) {
+        var width, height
         if (x2 == null)
-            x2 = x1 + img.width
+            width = img.width
+        else
+            width = x2 - x1
         if (y2 == null)
-            y2 = y1 + img.height
-        renderer.drawImage(img, x1, y1, x2, y2)
+            height = img.height
+        else
+            height = y2 - y1
+        renderer.drawImageRegion(img, x1, y1, width, height, img.x1, img.y1, img.x2 - img.x1, img.y2 - img.y1)
     }
 
     export function drawImageRegion(img: Image, x1: number, y1: number, x2: number, y2: number, ix1: number, iy1: number, ix2: number, iy2: number) {
-        renderer.drawImageRegion(img, x1, y1, x2, y2, ix1, iy1, ix2, iy2)
+        renderer.drawImageRegion(img, x1, y1, x2 - x1, y2 - y1, img.x1 + ix1, img.y1 + iy1, ix2 - ix1, iy2 - iy1)
     }
 
     export function drawString(font: Font, text: string, x: number, y: number, params?: TextLayoutParameters) {

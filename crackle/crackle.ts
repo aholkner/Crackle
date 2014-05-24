@@ -5,6 +5,7 @@
             renderer = new CanvasRenderer()
     }
 
+    export var time: number = 0
     export var timestep: number = 0
 
     function getValueByPath(o: any, s: string) {

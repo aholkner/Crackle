@@ -36,6 +36,7 @@
     <TypeScriptCompile Include="crackle\Text.ts" />
     <TypeScriptCompile Include="examples\BouncingBalls.ts" />
     <TypeScriptCompile Include="examples\Font.ts" />
+    <TypeScriptCompile Include="examples\ImageRegion2.ts" />
     <TypeScriptCompile Include="examples\SampleNearest.ts" />
   </ItemGroup>
   <ItemGroup>

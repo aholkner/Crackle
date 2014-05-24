@@ -32,22 +32,23 @@
                 this.loadCompleteCallback()
         }
 
-        loadImage(path: string): HTMLImageElement {
+        loadImage(image: Image, path: string): HTMLImageElement {
             var img = document.createElement('img')
             this.loadCount += 1
-            img.onload = () => { this.onImageLoaded(img) }
-            img.onerror = () => { this.onImageError(img) }
+            img.onload = () => { this.onImageLoaded(image) }
+            img.onerror = () => { this.onImageError(image) }
             img.src = path
             return img
         }
 
-        private onImageLoaded(img: HTMLImageElement) {
+        private onImageLoaded(image: Image) {
+            image.onLoaded()
             this.decrementLoadCount()
         }
 
-        private onImageError(img: HTMLImageElement) {
+        private onImageError(image: Image) {
             // TODO
-            throw new ResourceNotLoadedException(img.src)
+            throw new ResourceNotLoadedException(image.img.src)
         }
 
         loadFont(font: Font) {

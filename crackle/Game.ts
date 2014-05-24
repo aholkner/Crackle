@@ -34,6 +34,7 @@
             if (this.lastTimestamp > 0)
                 crackle.timestep = (timestamp - this.lastTimestamp) / 1000.0 // ms to secs
             this.lastTimestamp = timestamp
+            crackle.time = timestamp / 1000.0
 
             // Render frame
             renderer.beginFrame(this.canvas)
