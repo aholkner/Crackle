@@ -87,7 +87,7 @@
         }
 
         public setColor(r: number, g: number, b: number, a: number) {
-            this.ctx.fillStyle = 'rgba(' + r * 255 + ',' + g * 255 + ',' + b * 255 + ',' + a * 255 + ')'
+            this.ctx.fillStyle = 'rgba(' + Math.floor(r * 255) + ',' + Math.floor(g * 255) + ',' + Math.floor(b * 255) + ',' + a + ')'
         }
 
         public clear(r: number, g: number, b: number, a: number) {

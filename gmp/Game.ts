@@ -46,6 +46,15 @@
             this.world.draw()
         }
 
+        onKey(key: crackle.Key, pressed: boolean) {
+            if (pressed) {
+                this.world.onKeyPressed(key)
+                Debug.onKeyPressed(key)
+            } else {
+                this.world.onKeyReleased(key)
+            }
+        }
+
     }
 
 }

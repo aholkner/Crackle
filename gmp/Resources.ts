@@ -10,6 +10,8 @@
 
         static load() {
             Resources.titleImage = Resources.loadImage('title.png')
+
+            UI.load()
         }
 
     }

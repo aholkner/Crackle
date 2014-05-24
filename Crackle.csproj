@@ -53,11 +53,14 @@
     <TypeScriptCompile Include="examples\Keys.ts" />
     <TypeScriptCompile Include="examples\SampleNearest.ts" />
     <TypeScriptCompile Include="examples\TransformRotate.ts" />
+    <TypeScriptCompile Include="gmp\Debug.ts" />
+    <TypeScriptCompile Include="gmp\ArrayExtensions.ts" />
     <TypeScriptCompile Include="gmp\GameData.ts" />
     <TypeScriptCompile Include="gmp\Resources.ts" />
     <TypeScriptCompile Include="gmp\Game.ts" />
     <TypeScriptCompile Include="gmp\Menu.ts" />
     <TypeScriptCompile Include="gmp\TitleWorld.ts" />
+    <TypeScriptCompile Include="gmp\UI.ts" />
     <TypeScriptCompile Include="gmp\World.ts" />
     <TypeScriptCompile Include="gmp\_References.ts" />
   </ItemGroup>

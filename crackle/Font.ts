@@ -37,6 +37,7 @@
         specifier: string
         ascent: number
         descent: number
+        height: number
 
         constructor(public name: string, public size: number) {
             this.specifier = size + 'pt "' + name + '"'
@@ -47,6 +48,7 @@
             var cssMetrics = new CSSFontMetrics(this.specifier)
             this.ascent = cssMetrics.ascent
             this.descent = cssMetrics.descent
+            this.height = this.descent - this.ascent
         }
 
         measureString(text: string) {

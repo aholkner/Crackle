@@ -1,1 +1,2 @@
-﻿/// <reference path="World.ts" />
+﻿/// <reference path="Menu.ts" />
+/// <reference path="World.ts" />
