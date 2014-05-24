@@ -1,6 +1,8 @@
 ﻿module crackle {
 
     export interface Renderer {
+        defaultFont: Font
+
         beginFrame(canvas: HTMLCanvasElement)
         endFrame()
 

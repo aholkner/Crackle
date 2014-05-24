@@ -84,6 +84,9 @@
     }
 
     export function drawString(font: Font, text: string, x: number, y: number, params?: TextLayoutParameters) {
+        if (font == null)
+            font = renderer.defaultFont
+
         if (params == null)
             renderer.drawString(font, text, x, y)
         else {

@@ -62,7 +62,8 @@
             div.style.fontSize = '96pt'
             
             var span = document.createElement('span')
-            span.appendChild(document.createTextNode('wi.'))
+            span.appendChild(document.createTextNode('a test string.'))
+            span.style.whiteSpace = 'nowrap'
             div.appendChild(span)
 
             var body = document.getElementsByTagName('body')[0]
@@ -76,8 +77,11 @@
         // Compare DOM render of this font compared to a fallback; returns true if the metrics are different
         // and therefore the font has loaded
         get isLoaded(): boolean {
-            return Font.measureCSSFontWidth('"' + this.name + '",monospace') != Font.measureCSSFontWidth('monospace') ||
-                   Font.measureCSSFontWidth('"' + this.name + '",serif') != Font.measureCSSFontWidth('serif')
+            var name = this.name
+            if (name.indexOf(' ') != -1)
+                name = '"' + name + '"'
+            return Font.measureCSSFontWidth(name + ',monospace') != Font.measureCSSFontWidth('monospace') ||
+                Font.measureCSSFontWidth(name + ',serif') != Font.measureCSSFontWidth('serif')
         }
     }
 

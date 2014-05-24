@@ -21,10 +21,19 @@
 
             this.width = this.canvas.width
             this.height = this.canvas.height
+
+            document.addEventListener('keydown', (ev) => {
+                this.onKey(<Key>ev.keyCode, true)
+            })
+
+            document.addEventListener('keyup', (ev) => {
+                this.onKey(<Key>ev.keyCode, false)
+            })
         }
 
         run() {
             ResourceQueue.push(new ResourceQueue(() => { this.onLoadComplete() }))
+            renderer.defaultFont = new Font('monospace', 10)
             this.onLoad()
             ResourceQueue.pop()
         }
@@ -59,7 +68,11 @@
         }
 
         public onTick() {
-            clear(255, 0, 255, 255)
+            clear(1, 0, 1, 1)
+        }
+
+        public onKey(key: Key, pressed: boolean) {
+            // Subclass can handle key event
         }
 
     }

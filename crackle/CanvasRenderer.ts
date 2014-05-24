@@ -34,6 +34,7 @@
     }
 
     export class CanvasRenderer implements Renderer {
+        public defaultFont: Font
 
         private canvas: HTMLCanvasElement;
         private ctx: CanvasRenderingContext2D;
