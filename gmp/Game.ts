@@ -5,6 +5,10 @@
         worldStack: World[] = []
         mapWorlds: { [mapId: string]: World } = {}
 
+        mapScale: number = 4
+        get mapWidth(): number { return Math.floor(this.width / this.mapScale) }
+        get mapHeight(): number { return Math.floor(this.height / this.mapScale) }
+
         onLoad() {
             game = this
             Resources.load()
@@ -12,6 +16,14 @@
 
         onInit() {
             this.gotoMap('title')
+        }
+
+        canLoadCheckpoint(): boolean {
+            return false // TODO
+        }
+
+        loadCheckpoint() {
+            return false // TODO
         }
 
         get world(): World {

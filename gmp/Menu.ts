@@ -136,14 +136,16 @@ module gmp {
             }
 
             var infoY = y2
-            this.visibleItems.forEach((item, i) => {
+            var visibleItems = this.visibleItems
+            for (var i = 0; i < visibleItems.length; ++i) {
+                var item = visibleItems[i]
                 if (i == this.selectedIndex + this.scrollOffset)
                     infoY = y
 
                 this.activateMenuItemColor(i == this.selectedIndex + this.scrollOffset, item.enabled)
                 crackle.drawString(UI.font, item.name, x, y, { align: align, verticalAlign: crackle.VerticalAlign.top })
                 y += UI.font.height
-            })
+            }
 
             crackle.setColor(1, 1, 1, 1)
             if (this.scrollable) {
@@ -151,8 +153,13 @@ module gmp {
                 y += 32
             }
 
-            //if (this.enableInfo)
-            //    this.drawStatus(this.selectedItem.description, x2, infoY)
+            if (this.enableInfo)
+                this.drawStatus(this.selectedItem.description, x2, infoY)
+        }
+
+        drawStatus(msg: string, x: number, y: number) {
+            if (this.enableInfo && this.world.menuStack.last() == this && game.world == this.world)
+                UI.drawInfoBox(msg, x + 20, y - 4)
         }
 
         activateMenuItemColor(selected: boolean, enabled: boolean) {
@@ -162,6 +169,7 @@ module gmp {
             else
                 crackle.setColor(m * 164 / 255, m * 186 / 255, m * 201 / 255, 1)
         }
+
     }
 
 } 

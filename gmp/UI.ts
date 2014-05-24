@@ -79,14 +79,14 @@
         static getTile(i: number): crackle.Image {
             var ts = UI.ts
             var x = i % 16
-            var y = i / 16
+            var y = Math.floor(i / 16)
             return UI.image.getRegion(x * ts, y * ts, (x + 1) * ts, (y + 1) * ts)
         }
 
         static getTile2x(i: number): crackle.Image {
             var ts = UI.ts * 2
             var x = i % 8
-            var y = i / 8
+            var y = Math.floor(i / 8)
             return UI.image.getRegion(x * ts, y * ts, (x + 1) * ts, (y + 1) * ts)
         }
 
@@ -137,9 +137,9 @@
             var y2 = speakerY - 28
 
             var run = new crackle.TextRun({ font: UI.font }, text)
-            var textLayout = new crackle.TextLayout([run], x1, y2, { width: width, align: crackle.Align.left, verticalAign: crackle.VerticalAlign.bottom })
+            var textLayout = new crackle.TextLayout([run], x1, y2, { width: width, align: crackle.Align.left, verticalAlign: crackle.VerticalAlign.bottom })
             if (textLayout.contentWidth < 48)
-                textLayout = new crackle.TextLayout([run], x1, y2, { width: 48, align: crackle.Align.center, verticalAign: crackle.VerticalAlign.bottom })
+                textLayout = new crackle.TextLayout([run], x1, y2, { width: 48, align: crackle.Align.center, verticalAlign: crackle.VerticalAlign.bottom })
             var y1 = y2 - textLayout.contentHeight - 8 // hack workaround
             x2 = x1 + Math.max(textLayout.contentWidth, 48)
 
@@ -158,7 +158,7 @@
             var y1 = speakerY
 
             var run = new crackle.TextRun({ font: UI.font }, text)
-            var textLayout = new crackle.TextLayout([run], x1, y1, { width: width, align: crackle.Align.left, verticalAign: crackle.VerticalAlign.top })
+            var textLayout = new crackle.TextLayout([run], x1, y1, { width: width, align: crackle.Align.left, verticalAlign: crackle.VerticalAlign.top })
             if (y1 + textLayout.contentHeight > game.height - 116)
                 textLayout.y = y1 = game.height - 116 - textLayout.contentHeight
             var y2 = y1 + textLayout.contentHeight
@@ -175,7 +175,7 @@
             var cy = game.height / 2 - 32
 
             var run = new crackle.TextRun({ font: UI.font }, text)
-            var textLayout = new crackle.TextLayout([run], cx - width / 2, cy, { width: width, align: crackle.Align.center, verticalAign: crackle.VerticalAlign.center })
+            var textLayout = new crackle.TextLayout([run], cx - width / 2, cy, { width: width, align: crackle.Align.center, verticalAlign: crackle.VerticalAlign.center })
             var y1 = cy - textLayout.contentHeight / 2
             var y2 = cy + textLayout.contentHeight / 2
             var x1 = cx - textLayout.contentWidth / 2

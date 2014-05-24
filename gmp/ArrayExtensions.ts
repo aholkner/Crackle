@@ -2,6 +2,8 @@
     min(func?: { (element: T) }): number
     max(func?: { (element: T) }): number
     sum(func?: { (element: T) }): number
+
+    last(): T
 }
 
 Array.prototype.min = function (func) {
@@ -26,4 +28,8 @@ Array.prototype.sum = function (func) {
     } else {
         return this.reduce(function (a, b) { return a + func(b) }, 0)
     }
+}
+
+Array.prototype.last = function () {
+    return this[this.length - 1]
 }

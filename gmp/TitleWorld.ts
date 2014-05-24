@@ -5,14 +5,20 @@ module gmp {
     class TitleMenu extends Menu {
         constructor(world: World) {
             super(world)
-            this.items.push(new MenuItem('New Game', '', () => this.onNewGame()))
-            this.items.push(new MenuItem('Continue', '', () => this.onContinue(), false))
+            this.items.push(new MenuItem('New Game', null, () => this.onNewGame()))
+            this.items.push(new MenuItem('Continue', null, () => this.onContinue(), game.canLoadCheckpoint()))
+            this.canDismiss = false
+            this.enableInfo = false
+            this.y = game.height - 70
         }
 
         onNewGame() {
+            // TODO game.gotoMap('act1')
         }
 
         onContinue() {
+            if (!game.loadCheckpoint())
+                this.world.doDialog(null, 'Failed to load save game.')
         }
     }
 
@@ -38,6 +44,7 @@ module gmp {
         draw() {
             crackle.drawImage(Resources.titleImage, 0, 0, game.width, game.height)
             this.drawMenu()
+            this.drawDialog()
         }
     }
 
