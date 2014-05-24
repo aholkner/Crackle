@@ -40,7 +40,18 @@
         private ctx: CanvasRenderingContext2D;
         private ctxExtensions: ICanvasRenderingContext2DExtensions;
 
+        private backgroundCanvas: HTMLCanvasElement
+        private backgroundContext: CanvasRenderingContext2D
+
         private sampleNearest: boolean = false;
+
+        constructor() {
+            this.backgroundCanvas = document.createElement('canvas')
+            this.backgroundCanvas.style.display = 'hidden'
+            var body = document.getElementsByTagName('body')[0]
+            body.appendChild(this.backgroundCanvas)
+            this.backgroundContext = this.backgroundCanvas.getContext('2d')
+        }
 
         public beginFrame(canvas: HTMLCanvasElement) {
             this.canvas = canvas;
@@ -98,6 +109,10 @@
             this.ctx.fillStyle = restoreFillStyle
         }
 
+        public fillRect(x1: number, y1: number, x2: number, y2: number) {
+            this.ctx.fillRect(x1, y1, x2 - x1, y2 - y1)
+        }
+
         public drawImageRegion(image: Image, x: number, y: number, width: number, height: number, sx: number, sy: number, swidth: number, sheight: number) {
             this.ctxExtensions.setImageSmoothingEnabled(this.ctx, !image.params.sampleNearest)
             this.ctx.drawImage(image.img, sx, sy, swidth, sheight, x, y, width, height)
@@ -110,8 +125,10 @@
 
         public measureString(font: Font, text: string) {
             // Measure with context
-            this.ctx.font = font.specifier
-            return this.ctx.measureText(text).width
+            var ctx = this.ctx || this.backgroundContext
+                
+            ctx.font = font.specifier
+            return ctx.measureText(text).width
         }
     }
 }

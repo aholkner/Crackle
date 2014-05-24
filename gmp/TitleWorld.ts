@@ -36,7 +36,7 @@ module gmp {
         }
 
         draw() {
-            crackle.drawImage(Resources.titleImage, 0, 0, GameData.width, GameData.height)
+            crackle.drawImage(Resources.titleImage, 0, 0, game.width, game.height)
             this.drawMenu()
         }
     }

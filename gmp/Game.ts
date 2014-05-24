@@ -6,6 +6,7 @@
         mapWorlds: { [mapId: string]: World } = {}
 
         onLoad() {
+            game = this
             Resources.load()
         }
 
@@ -56,5 +57,7 @@
         }
 
     }
+
+    export var game: Game
 
 }

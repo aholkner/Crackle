@@ -7,9 +7,9 @@
     }
 
     export enum VerticalAlign {
+        baseline,
         top,
         center,
-        baseline,
         bottom
     }
 
@@ -81,8 +81,8 @@
             if (params != null) {
                 this._width = params.width || NaN
                 this._height = params.height || NaN
-                this._align = params.align || Align.left
-                this._verticalAlign = params.verticalAlign || VerticalAlign.baseline
+                this._align = params.align
+                this._verticalAlign = params.verticalAlign
                 this._overflow = params.overflow || Overflow.wrap
             }
         }

@@ -14,8 +14,8 @@ module gmp {
         title: string
         align: crackle.Align = crackle.Align.center
         verticalAlign: crackle.VerticalAlign = crackle.VerticalAlign.center
-        x: number = GameData.width / 2
-        y: number = GameData.height / 2
+        x: number = game.width / 2
+        y: number = game.height / 2
         minWidth: number = 200
 
         enableInfo: boolean = true
@@ -101,7 +101,7 @@ module gmp {
 
         moveSelection(dir: number) {
             var start = Math.max(0, this.selectedIndex)
-            this.selectedIndex = (this.selectedIndex + dir) % this.items.length
+            this.selectedIndex = Math.mod((this.selectedIndex + dir), this.items.length)
             if (this.selectedIndex < this.scrollOffset)
                 this.scrollOffset = this.selectedIndex
             else if (this.selectedIndex >= this.scrollOffset + this.maxItems)
@@ -121,8 +121,8 @@ module gmp {
             else if (align == crackle.Align.center)
                 x = (this.x1 + this.x2) / 2
 
-            //if (this.enableBorder)
-            //    UI.drawBox(new Rect(x1, y1, x2, y2), UI.menuBorder)
+            if (this.enableBorder)
+                UI.drawBox(new Rect(x1, y1, x2, y2), UI.menuBorder)
 
             var y: number = y1
             if (this.title != null) {
@@ -130,10 +130,10 @@ module gmp {
                 y += UI.font.height * 2
             }
 
-            //if (this.scrollable) {
-            //    UI.drawImage(UI.menuUpImage, (x1 + x2) / 2 - 16, y)
-            //    y += 32
-            //}
+            if (this.scrollable) {
+                UI.drawImage(UI.menuUpImage, (x1 + x2) / 2 - 16, y)
+                y += 32
+            }
 
             var infoY = y2
             this.visibleItems.forEach((item, i) => {
@@ -146,10 +146,10 @@ module gmp {
             })
 
             crackle.setColor(1, 1, 1, 1)
-            //if (this.scrollable) {
-            //    UI.drawImage(UI.menuDownImage, (x1 + x2) / 2 - 16, y)
-            //    y += 32
-            //}
+            if (this.scrollable) {
+                UI.drawImage(UI.menuDownImage, (x1 + x2) / 2 - 16, y)
+                y += 32
+            }
 
             //if (this.enableInfo)
             //    this.drawStatus(this.selectedItem.description, x2, infoY)

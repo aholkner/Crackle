@@ -86,6 +86,10 @@
         renderer.clear(r, g, b, a)
     }
 
+    export function fillRect(x1: number, y1: number, x2: number, y2: number) {
+        renderer.fillRect(x1, y1, x2, y2)
+    }
+
     export function drawImage(img: Image, x1: number, y1: number, x2?: number, y2?: number) {
         var width, height
         if (x2 == null)

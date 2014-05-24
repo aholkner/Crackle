@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="gmp\Debug.ts" />
     <TypeScriptCompile Include="gmp\ArrayExtensions.ts" />
     <TypeScriptCompile Include="gmp\GameData.ts" />
+    <TypeScriptCompile Include="gmp\MathExtensions.ts" />
     <TypeScriptCompile Include="gmp\Resources.ts" />
     <TypeScriptCompile Include="gmp\Game.ts" />
     <TypeScriptCompile Include="gmp\Menu.ts" />

@@ -14,6 +14,7 @@
 
         setColor(r: number, g: number, b: number, a: number)
         clear(r: number, g: number, b: number, a: number)
+        fillRect(x1: number, y1: number, x2: number, y2: number)
         drawImageRegion(img: Image, x: number, y: number, width: number, height: number, sx: number, sy: number, swidth: number, sheight: number)
         drawString(font: Font, text: string, x: number, y: number)
         measureString(font: Font, text: string)

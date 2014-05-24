@@ -4,7 +4,7 @@
 
         static titleImage: crackle.Image
 
-        private static loadImage(name: string): crackle.Image {
+        static loadImage(name: string): crackle.Image {
             return new crackle.Image('gmp/res/' + name, { sampleNearest: true })
         }
 
