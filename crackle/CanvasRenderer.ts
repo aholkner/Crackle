@@ -85,5 +85,11 @@
             this.ctx.font = font.specifier
             this.ctx.fillText(text, x, y)
         }
+
+        public measureString(font: Font, text: string) {
+            // Measure with context
+            this.ctx.font = font.specifier
+            return this.ctx.measureText(text).width
+        }
     }
 }

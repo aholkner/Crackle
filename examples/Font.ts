@@ -10,7 +10,12 @@
         public onTick() {
             crackle.clear(0, 0, 0, 1)
             crackle.setColor(1, 1, 1, 1)
-            crackle.drawString(this.font, 'Hello, Crackle!', 50, 50)
+            crackle.drawString(this.font, 'Hello, Crackle!', 0, 0, {
+                width: this.width,
+                height: this.height,
+                align: crackle.Align.center,
+                verticalAlign: crackle.VerticalAlign.center
+            })
         }
     }
 }

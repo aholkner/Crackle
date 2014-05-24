@@ -54,14 +54,18 @@
             if (!font.isLoaded) {
                 this.loadCount += 1
                 window.setTimeout(() => { this.pollFontLoaded(font) }, 100)
+            } else {
+                font.onLoaded()
             }
         }
 
         private pollFontLoaded(font) {
-            if (font.isLoaded)
+            if (font.isLoaded) {
+                font.onLoaded()
                 this.decrementLoadCount()
-            else
+            } else {
                 window.setTimeout(() => { this.pollFontLoaded(font) }, 100)
+            }
         }
     }
 

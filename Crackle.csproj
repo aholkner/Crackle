@@ -25,6 +25,7 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="crackle\Color.ts" />
     <TypeScriptCompile Include="crackle\crackle.ts" />
     <TypeScriptCompile Include="crackle\CanvasRenderer.ts" />
     <TypeScriptCompile Include="crackle\Font.ts" />
@@ -32,6 +33,7 @@
     <TypeScriptCompile Include="crackle\Graphics.ts" />
     <TypeScriptCompile Include="crackle\Renderer.ts" />
     <TypeScriptCompile Include="crackle\ResourceQueue.ts" />
+    <TypeScriptCompile Include="crackle\Text.ts" />
     <TypeScriptCompile Include="examples\BouncingBalls.ts" />
     <TypeScriptCompile Include="examples\Font.ts" />
     <TypeScriptCompile Include="examples\SampleNearest.ts" />

@@ -3,7 +3,7 @@
     export interface ImageParameters {
         sampleNearest: boolean
     }
-
+    
     export class Image {
         img: HTMLImageElement;
         params: ImageParameters;
@@ -47,7 +47,29 @@
         renderer.drawImage(img, x1, y1, x2, y2)
     }
 
-    export function drawString(font: Font, text: string, x: number, y: number) {
-        renderer.drawString(font, text, x, y)
+    export function drawString(font: Font, text: string, x: number, y: number, params?: TextLayoutParameters) {
+        if (params == null)
+            renderer.drawString(font, text, x, y)
+        else {
+            var run = new TextRun({ font: font }, text)
+            var textLayout = new TextLayout([run], x, y, params)
+            drawTextLayout(textLayout)
+        }
+    }
+
+    export function drawTextLayout(textLayout: TextLayout) {
+        var lines = textLayout.lines
+        for (var i = 0; i < lines.length; ++i) {
+            var line = lines[i]
+            var x = line.x
+            var y = line.y
+            for (var runIndex = 0; runIndex < line.runs.length; ++runIndex) {
+                // TODO color
+
+                var run = line.runs[runIndex]
+                renderer.drawString(run.style.font, run.text, x, y)
+                x += run.advance
+            }
+        }
     }
 } 

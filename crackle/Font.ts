@@ -1,5 +1,5 @@
 ﻿module crackle {
-
+    
     class CSSFontMetrics {
         ascent: number
         descent: number
@@ -43,10 +43,14 @@
             ResourceQueue.current.loadFont(this)
         }
 
-        public calculateMetrics() {
+        onLoaded() {
             var cssMetrics = new CSSFontMetrics(this.specifier)
             this.ascent = cssMetrics.ascent
             this.descent = cssMetrics.descent
+        }
+
+        measureString(text: string) {
+            return renderer.measureString(this, text)
         }
 
         // Create a hidden DOM node temporarily to measure a dummy string with the given
@@ -71,7 +75,7 @@
 
         // Compare DOM render of this font compared to a fallback; returns true if the metrics are different
         // and therefore the font has loaded
-        public get isLoaded(): boolean {
+        get isLoaded(): boolean {
             return Font.measureCSSFontWidth('"' + this.name + '",monospace') != Font.measureCSSFontWidth('monospace') ||
                    Font.measureCSSFontWidth('"' + this.name + '",serif') != Font.measureCSSFontWidth('serif')
         }
