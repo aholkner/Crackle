@@ -6,6 +6,12 @@
         beginFrame(canvas: HTMLCanvasElement)
         endFrame()
 
+        translate(x: number, y: number)
+        scale(x: number, y: number)
+        rotate(radians: number)
+        pushTransform()
+        popTransform()
+
         setColor(r: number, g: number, b: number, a: number)
         clear(r: number, g: number, b: number, a: number)
         drawImageRegion(img: Image, x: number, y: number, width: number, height: number, sx: number, sy: number, swidth: number, sheight: number)

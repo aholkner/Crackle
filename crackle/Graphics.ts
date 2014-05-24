@@ -58,6 +58,26 @@
         }
     }
 
+    export function translate(x: number, y: number) {
+        renderer.translate(x, y)
+    }
+
+    export function scale(x: number, y: number) {
+        renderer.scale(x, y)
+    }
+
+    export function rotate(radians: number) {
+        renderer.rotate(radians)
+    }
+
+    export function pushTransform() {
+        renderer.pushTransform()
+    }
+
+    export function popTransform() {
+        renderer.popTransform()
+    }
+
     export function setColor(r: number, g: number, b: number, a: number) {
         renderer.setColor(r, g, b, a)
     }

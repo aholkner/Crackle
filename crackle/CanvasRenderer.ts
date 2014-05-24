@@ -45,6 +45,7 @@
         public beginFrame(canvas: HTMLCanvasElement) {
             this.canvas = canvas;
             this.ctx = canvas.getContext('2d');
+            this.ctx.setTransform(1, 0, 0, 1, 0, 0)
 
             if (this.ctxExtensions == null) {
                 if ('mozImageSmoothingEnabled' in this.ctx)
@@ -63,6 +64,26 @@
         public endFrame() {
             this.canvas = null;
             this.ctx = null;
+        }
+
+        translate(x: number, y: number) {
+            this.ctx.translate(x, y)
+        }
+
+        scale(x: number, y: number) {
+            this.ctx.scale(x, y)
+        }
+
+        rotate(radians: number) {
+            this.ctx.rotate(-radians)
+        }
+
+        pushTransform() {
+            this.ctx.save()
+        }
+
+        popTransform() {
+            this.ctx.restore()
         }
 
         public setColor(r: number, g: number, b: number, a: number) {

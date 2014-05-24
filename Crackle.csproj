@@ -41,6 +41,7 @@
     <TypeScriptCompile Include="examples\KeyEvent.ts" />
     <TypeScriptCompile Include="examples\Keys.ts" />
     <TypeScriptCompile Include="examples\SampleNearest.ts" />
+    <TypeScriptCompile Include="examples\TransformRotate.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="examples\res\ATTRIBUTION" />
