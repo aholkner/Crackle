@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="8" tileheight="8">
+ <tileset firstgid="1" source="sprites.tsx"/>
+ <tileset firstgid="49" source="props.tsx"/>
+ <tileset firstgid="113" source="tiles_act3.tsx"/>
+ <layer name="Tiles" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt0rkOwjAQRVF/dMISIBBSUCMqoGArQKKAT+QhGWmEbDF2nAygKY6Syne8lMaYHSyhcFjBPpJvzZcxDIX7pWB/9AV9yfOX7nPu/wQX607+OQ4J+s/9HyOlev+S/dsf75++/zVsHLYN+teA/fvEtrnnX8HcIbffXoP+mazlUsPkgypyhoy5PkfoDCnboTO00aYz5J45MnvXbbXf5+jDwhp01KWmpD/ruK197Wtf+9r//f4DBAcbNg==
+  </data>
+ </layer>
+ <layer name="Sprites" width="32" height="32">
+  <properties>
+   <property name="sprite" value="1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7DZwb9BHOwi4WkVNAEAAJr5DgAcWNSsACo=
+  </data>
+ </layer>
+ <layer name="Props" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztk80OwiAMgPtKuqgxzt+LoiZezQ6KntT3fwBLAhEbGLDNYTa+5EsIaQt0HcB/MddU8JIYal0G6BDNUCb3HpYYatbA+SNNBSuJoZqo2yceGE+h/dJ76wPtfyi+fYqN6Mk54vm8wVqbCjniO+eOmDE6gc/8MG1PMEVnjhpby76odUGvjvxcq7GC7zuvPXJPjhgfVI1dQM4CXULYv/crqsxH1ykM68IU2FHUW2/oPeI9nuhLrm3936MH6bGNS7WAaeb6NH+JRCLRJ94qghoY
+  </data>
+ </layer>
+ <objectgroup name="NPCs" width="32" height="32">
+  <object name="Journalist3" gid="9" x="56" y="184"/>
+  <object name="Journalist4" gid="9" x="72" y="160"/>
+  <object name="Journalist5" gid="9" x="72" y="176"/>
+  <object name="WarVet1" gid="19" x="48" y="56"/>
+  <object name="WarVet2" gid="19" x="32" y="48"/>
+  <object name="Teacher1" gid="18" x="200" y="80"/>
+  <object name="Teacher2" gid="18" x="216" y="72"/>
+  <object name="Kawalski" gid="24" x="144" y="128"/>
+  <object name="Cabinet2" gid="20" x="152" y="40"/>
+  <object name="Cabinet1" gid="20" x="120" y="40"/>
+  <object name="Cabinet3" gid="20" x="136" y="40"/>
+  <object name="PA2" gid="11" x="104" y="168"/>
+  <object name="StairsToWhiteHouseBasement" gid="30" x="8" y="8"/>
+  <object name="DoorToWhiteHouseBasement" gid="32" x="56" y="104"/>
+  <object name="DoorToCabinetRoom" gid="33" x="88" y="56"/>
+  <object name="DoorToWarVetRoom" gid="34" x="64" y="80"/>
+  <object name="DoorToTeacherRoom" gid="35" x="184" y="96"/>
+  <object name="Marketing4" gid="28" x="160" y="72"/>
+ </objectgroup>
+ <objectgroup name="Rooms" width="32" height="32"/>
+</map>

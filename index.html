@@ -3,21 +3,39 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Crackle</title>
+    <title>Goodnight, Mr President</title>
     <style>
         @font-face {
             font-family: 'tinyfont';
-            src: url('examples/res/tinyfont.eot');
-            src: url('examples/res/tinyfont.eot?#iefix') format('embedded-opentype'),
-                 url('examples/res/tinyfont.woff') format('woff'),
-                 url('examples/res/tinyfont.ttf') format('truetype'),
-                 url('examples/res/tinyfont.svg#04b03regular') format('svg');
+            src: url('gmp/res/tinyfont.eot');
+            src: url('gmp/res/tinyfont.eot?#iefix') format('embedded-opentype'),
+                 url('gmp/res/tinyfont.woff') format('woff'),
+                 url('gmp/res/tinyfont.ttf') format('truetype'),
+                 url('gmp/res/tinyfont.svg#04b03regular') format('svg');
+        }
+
+        body {
+            background: black;
+            color: white
+        }
+
+        h1 {
+            font: 20pt tinyfont
+        }
+
+        #content {
+            margin: auto;
+            margin-top: 100px
         }
     </style>
     <script src="crackle.js"></script>
 </head>
 <body>
-    <h1>Crackle</h1>
+    <div id="content"
+         style="width:640px;height:480px"
+         data-crackle-game="gmp.Game"></div>
+    <!--
+    <h1>Crackle Examples</h1>
 
     <div id="content"
          style="width:512px;height:512px"
@@ -37,9 +55,9 @@
     <div id="content"
          style="width:200px;height:200px"
          data-crackle-game="Examples.SampleNearest.Game"></div>
-
     <div id="content"
          style="width:200px;height:200px"
          data-crackle-game="Examples.Font.Game"></div>
+    -->
 </body>
 </html>

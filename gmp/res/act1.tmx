@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="28" height="31" tilewidth="8" tileheight="8">
+ <tileset firstgid="1" name="tiles_act1" tilewidth="8" tileheight="8">
+  <image source="tiles_act1.png" width="64" height="64"/>
+  <terraintypes>
+   <terrain name="Interior" tile="-1"/>
+   <terrain name="Exterior" tile="-1"/>
+  </terraintypes>
+  <tile id="0" terrain="1,1,1,0">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="1" terrain="1,1,0,0">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="2" terrain="1,1,0,1">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="3" terrain="0,0,0,1">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="4" terrain="0,0,1,1">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="5" terrain="0,0,1,0">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="8" terrain="1,0,1,0">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="9" terrain="0,0,0,0"/>
+  <tile id="10" terrain="0,1,0,1">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="11" terrain="0,1,0,1">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="12" terrain="1,1,1,1"/>
+  <tile id="13" terrain="1,0,1,0">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="16" terrain="1,0,1,1">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="17" terrain="0,0,1,1">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="18" terrain="0,1,1,1">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="19" terrain="0,1,0,0">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="20" terrain="1,1,0,0">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="21" terrain="1,0,0,0">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="c" value="lu"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="c" value="u"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="c" value="ur"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="32">
+   <properties>
+    <property name="c" value="l"/>
+   </properties>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="c" value="r"/>
+   </properties>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="c" value="dl"/>
+   </properties>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="c" value="d"/>
+   </properties>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="c" value="dr"/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="44">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="c" value="dr"/>
+   </properties>
+  </tile>
+  <tile id="50">
+   <properties>
+    <property name="c" value="d"/>
+   </properties>
+  </tile>
+  <tile id="51">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="52">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="53">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="57">
+   <properties>
+    <property name="c" value="dl"/>
+   </properties>
+  </tile>
+  <tile id="59">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="60">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+  <tile id="61">
+   <properties>
+    <property name="c" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="65" source="sprites.tsx"/>
+ <tileset firstgid="113" source="props.tsx"/>
+ <layer name="Tiles" width="28" height="31">
+  <data encoding="base64" compression="zlib">
+   eJztlYkKwjAMQOtkeM4TEbydCuIFiije/v9XmUIGocxlLduU6eCx9Xw0zVpHCOH8SQUZoAVYwAHpYR0tq+0W9umTelmXZXwVoKgwwberlGn7DhkrbWXGd4vYd4/Zd9H0rYAFcsL3likvie9MxkvWjK9Axpqgrq/E+PZAJwTdN74o8sXDJd+bkD6TfPFywhX+OfJNPi6eBZxXZQDYwBWZAjmgTcgDM9JH9m8ars8vLlXFV2Pm/kVfncSf4rcPUfh0CPJ59xolzP1k6tPZlzh93P+o4xsCI+SYgE8l7ng+gTnySGB9Se/fJ/NTnhsNxCZw57epL4i0Py8u5D6P
+  </data>
+ </layer>
+ <layer name="Props" width="28" height="31">
+  <data encoding="base64" compression="zlib">
+   eJxjYBh8YOJAO2AQgKESBmVAXI4mVgGlO3HwiTFjsABcbqbEnElUMpMSQG03VBBWQhFoIlNfA5n62snU1wHENVjEK4G4Go++fiR2CYl21gFxPZpYIwn6S0m0jxjQBcTdSLiHArMKgbgIiIuRxGhdPtIiTLAB9PKFWuUNvcBgKMtoBWrpbB8onRcTVEU5mI3Epkc6X0wHO5DBaixixJTnlKTlJUC8FInfj0shBQC5zFsDxGtpYMcoGFgAAJmbHXU=
+  </data>
+ </layer>
+ <layer name="Sprites" width="28" height="31">
+  <properties>
+   <property name="sprite" value="1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7DZxb8BPOwhJK2CJgDw31wHAKCw0m4Aag==
+  </data>
+ </layer>
+ <objectgroup name="NPCs" width="28" height="31">
+  <object name="Receptionist" gid="71" x="88" y="96"/>
+  <object name="Mayor" gid="75" x="64" y="120"/>
+  <object name="Protester1" gid="72" x="32" y="168"/>
+  <object name="Head Protester" gid="72" x="40" y="184"/>
+  <object name="Protester2" gid="72" x="48" y="168"/>
+  <object name="Journalist" gid="73" x="168" y="56"/>
+  <object name="Wife" gid="86" x="192" y="192"/>
+  <object name="Sponsor" gid="67" x="168" y="80"/>
+  <object name="Constituent1" gid="74" x="40" y="48"/>
+  <object name="Constituent2" gid="74" x="72" y="48"/>
+  <object name="Constituent3" gid="74" x="112" y="64"/>
+  <object name="Marketing1" gid="92" x="136" y="48"/>
+ </objectgroup>
+ <objectgroup name="Rooms" width="28" height="31" visible="0">
+  <object name="Mayor's Office" x="32" y="80" width="40" height="64"/>
+  <object name="Receptionist's Office" x="72" y="80" width="40" height="32"/>
+ </objectgroup>
+</map>
