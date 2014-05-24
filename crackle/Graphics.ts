@@ -47,6 +47,10 @@
         renderer.drawImage(img, x1, y1, x2, y2)
     }
 
+    export function drawImageRegion(img: Image, x1: number, y1: number, x2: number, y2: number, ix1: number, iy1: number, ix2: number, iy2: number) {
+        renderer.drawImageRegion(img, x1, y1, x2, y2, ix1, iy1, ix2, iy2)
+    }
+
     export function drawString(font: Font, text: string, x: number, y: number, params?: TextLayoutParameters) {
         if (params == null)
             renderer.drawString(font, text, x, y)

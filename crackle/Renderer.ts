@@ -7,6 +7,7 @@
         setColor(r: number, g: number, b: number, a: number)
         clear(r: number, g: number, b: number, a: number)
         drawImage(img: Image, x1: number, y1: number, x2: number, y2: number)
+        drawImageRegion(img: Image, x1: number, y1: number, x2: number, y2: number, ix1: number, iy1: number, ix2: number, iy2: number)
         drawString(font: Font, text: string, x: number, y: number)
         measureString(font: Font, text: string)
     }

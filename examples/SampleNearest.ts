@@ -13,8 +13,10 @@ module Examples.SampleNearest {
         public onTick() {
             crackle.clear(0, 0, 0, 255)
             crackle.setColor(1, 1, 1, 1)
-            crackle.drawImage(Game.linearImage, 0, 0, this.width / 2, this.height)
-            crackle.drawImage(Game.nearestImage, this.width / 2, 0, this.width, this.height)
+            crackle.drawImageRegion(Game.linearImage, 0, 0, this.width / 2, this.height,
+                0, 0, 16, 16)
+            crackle.drawImageRegion(Game.nearestImage, this.width / 2, 0, this.width, this.height,
+                16, 0, 32, 16)
         }
     }
 }
