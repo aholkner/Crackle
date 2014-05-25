@@ -177,6 +177,15 @@
             return null
         }
 
+        getTileIndex(x: number, y: number): number {
+            var tx = Math.floor(x / this.tileWidth)
+            var ty = Math.floor(y / this.tileHeight)
+            if (tx < 0 || tx >= this.cols ||
+                ty < 0 || ty >= this.rows)
+                return this.rows * this.cols - 1
+            return ty * this.cols + tx
+        }
+
         draw(rect: Rect) {
             var tw = this.tileWidth
             var th = this.tileHeight

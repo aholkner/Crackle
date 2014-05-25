@@ -34,7 +34,7 @@
         currentCharacter: Character
         questName: string
 
-        tileSize: number = 16
+        tileSize: number = 8
         cameraX: number = 0
         cameraY: number = 0
 
@@ -95,6 +95,15 @@
             sprite.name = name
             this.sprites.push(sprite)
             return sprite
+        }
+
+        getSpriteAt(x: number, y: number): Sprite {
+            for (var i = 0; i < this.sprites.length; ++i) {
+                var sprite = this.sprites[i]
+                if (sprite.x == x && sprite.y == y)
+                    return sprite
+            }
+            return null;
         }
 
         // Drawing

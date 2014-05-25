@@ -9,6 +9,8 @@
         height: number
 
         resourceQueue: ResourceQueue
+
+        private keys: {} = {}
         
         constructor(element: HTMLElement) {
             init()
@@ -23,10 +25,14 @@
             this.height = this.canvas.height
 
             document.addEventListener('keydown', (ev) => {
-                this.onKey(<Key>ev.keyCode, true)
+                if (!(ev.keyCode in this.keys)) {
+                    this.keys[ev.keyCode] = true
+                    this.onKey(<Key>ev.keyCode, true)
+                }
             })
 
             document.addEventListener('keyup', (ev) => {
+                delete this.keys[ev.keyCode]
                 this.onKey(<Key>ev.keyCode, false)
             })
         }

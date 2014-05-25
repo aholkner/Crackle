@@ -5,6 +5,7 @@
         static onKeyPressed(key: crackle.Key) {
         }
 
+        static disableCollision: boolean
     }
 
 }
