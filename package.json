@@ -4,6 +4,7 @@
   "description": "",
   "dependencies": {
     "harp": "*"
+    "typescript": "*"
   },
   "engines": {
     "node": "0.10.x",
