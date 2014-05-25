@@ -1,1 +1,2 @@
-require('harp').server(__dirname, { port: process.env.PORT || 5000 })
+var connect = require('connect');
+connect().use(connect.static(__dirname)).listen(process.env.PORT || 5000);
