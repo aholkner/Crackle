@@ -6,7 +6,7 @@
 
         private static instances: ResourceQueue[] = []
 
-        constructor(callback) {
+        constructor(callback?: { () }) {
             this.loadCompleteCallback = callback;
         }
 
@@ -17,19 +17,24 @@
         static pop() {
             var resourceQueue = ResourceQueue.instances.pop()
             if (resourceQueue.loadCount == 0)
-                resourceQueue.loadCompleteCallback()
+                resourceQueue.loadCompleteCallback && resourceQueue.loadCompleteCallback()
+        }
+
+        static endFrame() {
+            while (ResourceQueue.instances.length > 0)
+                ResourceQueue.pop()
         }
 
         static get current(): ResourceQueue {
-            if (ResourceQueue.instances.length > 0)
-                return ResourceQueue.instances[ResourceQueue.instances.length - 1]
-            return null
+            if (ResourceQueue.instances.length == 0)
+                ResourceQueue.instances.push(new ResourceQueue())
+            return ResourceQueue.instances[ResourceQueue.instances.length - 1]
         }
 
         private decrementLoadCount() {
             this.loadCount -= 1
             if (this.loadCount == 0)
-                this.loadCompleteCallback()
+                this.loadCompleteCallback && this.loadCompleteCallback()
         }
 
         loadImage(image: Image, path: string): HTMLImageElement {
@@ -67,6 +72,27 @@
             } else {
                 window.setTimeout(() => { this.pollFontLoaded(font) }, 100)
             }
+        }
+
+        loadJsonData(jsonData: JsonData) {
+            this.loadCount += 1
+            var xhr = typeof XMLHttpRequest != 'undefined'
+                ? new XMLHttpRequest()
+                : new ActiveXObject('Microsoft.XMLHTTP');
+            xhr.open('get', jsonData.src, true);
+            xhr.onreadystatechange = () => {
+                var status;
+                if (xhr.readyState == 4) {
+                    status = xhr.status;
+                    if (status == 200) {
+                        jsonData.data = JSON.parse(xhr.responseText);
+                        this.decrementLoadCount()
+                    } else {
+                        throw new ResourceNotLoadedException(jsonData.src)
+                    }
+                }
+            };
+            xhr.send();
         }
     }
 

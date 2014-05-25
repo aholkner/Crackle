@@ -50,6 +50,9 @@
             this.onTick()
             renderer.endFrame()
 
+            // Wait for loading complete
+            ResourceQueue.endFrame()
+
             // Request next frame
             window.requestAnimationFrame((timestamp) => { this.onAnimationFrame(timestamp) })
         }

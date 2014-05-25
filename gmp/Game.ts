@@ -15,7 +15,8 @@
         }
 
         onInit() {
-            this.gotoMap('title')
+            this.gotoMap('act1')
+            //this.gotoMap('title')
         }
 
         canLoadCheckpoint(): boolean {
@@ -45,6 +46,8 @@
                 world = this.mapWorlds[mapId]
             else if (mapId == 'title')
                 world = new TitleWorld(mapId)
+            else
+                world = new MapWorld(mapId)
 
             this.mapWorlds[mapId] = world
 

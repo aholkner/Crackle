@@ -6,10 +6,13 @@
     }
 
     export class World {
+        map: Tilemap
         menuStack: Menu[] = []
         private timeouts: Timeout[] = []
 
         constructor(mapId: string) {
+            if (mapId in Resources.mapData)
+                this.map = new Tilemap(Resources.mapData[mapId])
         }
 
         start() {
@@ -29,8 +32,8 @@
         // Drawing
 
         tileSize: number = 16
-        cameraX: number
-        cameraY: number
+        cameraX: number = 0
+        cameraY: number = 0
 
         draw() {
             this.drawWorld()
@@ -40,8 +43,29 @@
         }
 
         drawWorld() {
-            // TODO
+            var ts = this.tileSize
 
+            var viewport = new Rect(this.cameraX,
+                this.cameraY,
+                this.cameraX + game.mapWidth,
+                this.cameraY + game.mapHeight)
+
+            crackle.pushTransform()
+            crackle.scale(game.mapScale, game.mapScale)
+            crackle.translate(-viewport.x1, -viewport.y1)
+
+            this.map.draw(viewport)
+            //for sprite in this.sprites:
+            //    if (sprite.effectDead)
+            //    crackle.pushTransform()
+            //        crackle.translate(sprite.x * ts + 4, sprite.y * ts + 4)
+            //        crackle.rotate(-math.pi / 2)
+            //        crackle.drawImage(sprite.image, -4, -4)
+            //        crackle.popTransform()
+            //    else:
+            //        crackle.drawImage(sprite.image, sprite.x * ts, sprite.y * ts)
+
+            crackle.popTransform()
             this.drawDialog()
         }
 

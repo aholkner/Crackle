@@ -13,7 +13,7 @@ module gmp {
         }
 
         onNewGame() {
-            // TODO game.gotoMap('act1')
+            game.gotoMap('act1')
         }
 
         onContinue() {
