@@ -88,6 +88,23 @@
             }
         }
 
+        // Touch emulates directional keys
+        onTouch(x: number, y: number, touch: number, pressed: boolean) {
+            if (pressed) {
+                if (x < this.width / 3)
+                    this.onKey(crackle.Key.left, true)
+                else if (x > this.width * 2 / 3)
+                    this.onKey(crackle.Key.right, true)
+                else if (y < this.height / 3)
+                    this.onKey(crackle.Key.up, true)
+                else if (y > this.height * 2 / 3)
+                    this.onKey(crackle.Key.down, true)
+                else
+                    this.onKey(crackle.Key.enter, true)
+            }
+        }
+
+
     }
 
     export var game: Game

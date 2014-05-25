@@ -35,6 +35,15 @@
                 delete this.keys[ev.keyCode]
                 this.onKey(<Key>ev.keyCode, false)
             })
+
+            this.canvas.addEventListener('mousedown', (ev) => {
+                this.onMouse(ev.clientX - this.canvas.offsetLeft, ev.clientY - this.canvas.offsetTop, ev.button, true)
+            })
+
+            this.canvas.addEventListener('touchstart', (ev:any) => {
+                if (ev.touches.length > 0)
+                    this.onTouch(ev.touches[0].pageX - this.canvas.offsetLeft, ev.touches[0].pageY - this.canvas.offsetTop, ev.touches[0].identifier, true)
+            })
         }
 
         run() {
@@ -82,6 +91,14 @@
 
         public onKey(key: Key, pressed: boolean) {
             // Subclass can handle key event
+        }
+
+        public onMouse(x: number, y: number, button: number, pressed: boolean) {
+            // Subclass can handle mouse event
+        }
+
+        public onTouch(x: number, y: number, touch: number, pressed: boolean) {
+            // Subclass can handle mouse event
         }
 
     }
