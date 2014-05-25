@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="../crackle/Game.ts" />
+
 module Examples.SampleNearest {
 
     export class Game extends crackle.Game {

@@ -1,4 +1,6 @@
-﻿module gmp {
+﻿/// <reference path="_References.ts" />
+
+module gmp {
 
     export class Game extends crackle.Game {
 

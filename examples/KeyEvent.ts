@@ -1,4 +1,6 @@
-﻿module Examples.KeyEvent {
+﻿/// <reference path="../crackle/Game.ts" />
+
+module Examples.KeyEvent {
 
     export class Game extends crackle.Game {
 

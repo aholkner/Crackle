@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="../crackle/Game.ts" />
+
 module Examples.ImageRegion2 {
 
     export class Game extends crackle.Game {

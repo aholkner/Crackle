@@ -1,3 +1,5 @@
+/// <reference path="../crackle/Game.ts" />
+
 module Examples.BouncingBalls {
 
     class Ball {
