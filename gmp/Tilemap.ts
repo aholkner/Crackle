@@ -73,6 +73,11 @@
     }
 
     export class TilemapObject {
+        x: number
+        y: number
+        name: string
+        tile: Tile
+        properties: { [key: string]: any }
     }
 
     export class TilemapObjectLayer extends TilemapLayer {
@@ -143,6 +148,15 @@
         private loadObjectLayer(layerData: TilemapLayerData): TilemapObjectLayer {
             var layer = new TilemapObjectLayer()
             layer.name = layerData.name
+            layerData.objects.forEach((objectData) => {
+                var obj = new TilemapObject()
+                obj.x = objectData.x
+                obj.y = objectData.y
+                obj.name = objectData.name
+                obj.tile = this.getTile(objectData.gid)
+                obj.properties = objectData.properties
+                layer.objects.push(obj)
+            })
             return layer
         }
 

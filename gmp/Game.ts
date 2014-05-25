@@ -4,6 +4,8 @@
 
         worldStack: World[] = []
         mapWorlds: { [mapId: string]: World } = {}
+        player: Character
+        allies: Character[]
 
         mapScale: number = 4
         get mapWidth(): number { return Math.floor(this.width / this.mapScale) }
@@ -15,8 +17,23 @@
         }
 
         onInit() {
+            this.loadCharacterSprites()
+
+            this.player = new Character('Player', 1, [], false)
+            this.allies = [this.player]
+
             this.gotoMap('act1')
             //this.gotoMap('title')
+        }
+
+        loadCharacterSprites() {
+            var tilemap = new Tilemap(Resources.mapData['act1'])
+            tilemap.tilesets.forEach((tileset) => {
+                tileset.tiles.forEach((tile) => {
+                    if (tile.properties != null && 'character' in tile.properties)
+                        Resources.characterImages[tile.properties['character']] = tile.image
+                })
+            })
         }
 
         canLoadCheckpoint(): boolean {

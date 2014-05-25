@@ -5,14 +5,63 @@
         }
     }
 
+    export class Sprite {
+        name: string = '??'
+        effectDead: boolean
+        scriptIndex: number
+        properties: { [key: string]: any }
+
+        constructor(public image: crackle.Image, public x: number, public y: number) {
+        }
+    }
+
+    export class Slot {
+        character: Character
+        sprite: Sprite
+
+        constructor(public x: number, public y: number) {
+        }
+    }
+
     export class World {
         map: Tilemap
         menuStack: Menu[] = []
+        sprites: Sprite[] = []
+
+        activeScript: any // TODO
+        activeScriptSprite: Sprite
+        mapScriptSprite: Sprite // TODO
+        currentCharacter: Character
+        questName: string
+
+        tileSize: number = 16
+        cameraX: number = 0
+        cameraY: number = 0
+
+        playerSlots: Slot[] = [null, null, null, null]
+        monsterSlots: Slot[] = [null, null, null, null]
+
+        dialogSprite: Sprite
+        dialogText: string
+
         private timeouts: Timeout[] = []
 
         constructor(mapId: string) {
-            if (mapId in Resources.mapData)
+            if (mapId in Resources.mapData) {
                 this.map = new Tilemap(Resources.mapData[mapId])
+
+                this.map.layers.forEach((layer) => {
+                    if (!(layer instanceof TilemapObjectLayer))
+                        return
+                        
+                    (<TilemapObjectLayer>layer).objects.forEach((obj:TilemapObject) => {
+                        var x = obj.x / this.tileSize
+                        var y = obj.y / this.tileSize
+                        if (obj.tile != null)
+                            this.addSprite(obj.tile.image, x, y - 1, obj.name, obj.tile.properties)
+                    })
+                })
+            }
         }
 
         start() {
@@ -29,11 +78,26 @@
             }
         }
 
-        // Drawing
+        addSprite(image: crackle.Image, x: number, y: number, name?: string, properties?: { [key: string]: any }): Sprite {
+            if (properties != null) {
+                if ('player_slot' in properties) {
+                    this.playerSlots[Math.floor(properties['player_slot']) - 1] = new Slot(x, y)
+                    return null
+                }
+                else if ('monster_slot' in properties) {
+                    this.monsterSlots[Math.floor(properties['monster_slot']) - 1] = new Slot(x, y)
+                    return null
+                }
+            }
 
-        tileSize: number = 16
-        cameraX: number = 0
-        cameraY: number = 0
+            var sprite = new Sprite(image, x, y)
+            sprite.properties = properties
+            sprite.name = name
+            this.sprites.push(sprite)
+            return sprite
+        }
+
+        // Drawing
 
         draw() {
             this.drawWorld()
@@ -55,15 +119,17 @@
             crackle.translate(-viewport.x1, -viewport.y1)
 
             this.map.draw(viewport)
-            //for sprite in this.sprites:
-            //    if (sprite.effectDead)
-            //    crackle.pushTransform()
-            //        crackle.translate(sprite.x * ts + 4, sprite.y * ts + 4)
-            //        crackle.rotate(-math.pi / 2)
-            //        crackle.drawImage(sprite.image, -4, -4)
-            //        crackle.popTransform()
-            //    else:
-            //        crackle.drawImage(sprite.image, sprite.x * ts, sprite.y * ts)
+            this.sprites.forEach((sprite) => {
+                if (sprite.effectDead) {
+                    crackle.pushTransform()
+                    crackle.translate(sprite.x * ts + 4, sprite.y * ts + 4)
+                    crackle.rotate(-Math.PI / 2)
+                    crackle.drawImage(sprite.image, -4, -4)
+                    crackle.popTransform()
+                } else {
+                    crackle.drawImage(sprite.image, sprite.x * ts, sprite.y * ts)
+                }
+            })
 
             crackle.popTransform()
             this.drawDialog()
@@ -117,9 +183,6 @@
         }
 
         // Script
-
-        dialogSprite: any // TODO sprite
-        dialogText: string
 
         after(timeout: number, func: { () }) {
             this.timeouts.push(new Timeout(timeout, func))
