@@ -15,6 +15,7 @@ module gmp {
             if (playerSlot != null)
                 this.playerSprite = this.addSprite(game.player.image, playerSlot.x, playerSlot.y, 'Player')
 
+            this.doDialog(null, 'Good morning, Phil Mossman')
         }
 
         update() {
