@@ -19,6 +19,7 @@ module gmp {
         }
 
         onInit() {
+            GameData.init()
             this.loadCharacterSprites()
 
             this.player = new Character('Player', 1, [], false)
@@ -29,7 +30,7 @@ module gmp {
         }
 
         loadCharacterSprites() {
-            var tilemap = new Tilemap(Resources.mapData['act1'])
+            var tilemap = Resources.tilemaps['act1']
             tilemap.tilesets.forEach((tileset) => {
                 tileset.tiles.forEach((tile) => {
                     if (tile.properties != null && 'character' in tile.properties)

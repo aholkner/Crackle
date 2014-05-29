@@ -2,6 +2,10 @@
 
     export class GameData {
 
+        static init() {
+            
+        }
+        
 
     }
 

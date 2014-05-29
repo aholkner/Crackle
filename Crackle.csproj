@@ -42,7 +42,6 @@
     <TypeScriptCompile Include="crackle\Font.ts" />
     <TypeScriptCompile Include="crackle\Game.ts" />
     <TypeScriptCompile Include="crackle\Graphics.ts" />
-    <TypeScriptCompile Include="crackle\JsonData.ts" />
     <TypeScriptCompile Include="crackle\Key.ts" />
     <TypeScriptCompile Include="crackle\Renderer.ts" />
     <TypeScriptCompile Include="crackle\ResourceQueue.ts" />
@@ -63,6 +62,7 @@
     <TypeScriptCompile Include="gmp\Resources.ts" />
     <TypeScriptCompile Include="gmp\Game.ts" />
     <TypeScriptCompile Include="gmp\Menu.ts" />
+    <TypeScriptCompile Include="gmp\GoogleSpreadsheet.ts" />
     <TypeScriptCompile Include="gmp\Tilemap.ts" />
     <TypeScriptCompile Include="gmp\TitleWorld.ts" />
     <TypeScriptCompile Include="gmp\UI.ts" />

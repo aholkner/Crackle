@@ -3,20 +3,22 @@
     export class Resources {
 
         static titleImage: crackle.Image
-        static mapData: { [mapName: string]: crackle.JsonData } = {}
+        static tilemaps: { [mapId: string]: Tilemap } = {}
         static characterImages: { [name: string]: crackle.Image } = {} 
+        static spreadsheet: GoogleSpreadsheet
 
         static loadImage(name: string): crackle.Image {
             return new crackle.Image('gmp/res/' + name, { sampleNearest: true })
         }
 
-        static loadJson(name: string) {
-            return new crackle.JsonData('gmp/res/' + name)
+        static loadTilemap(name: string): Tilemap {
+            return new Tilemap('gmp/res/' + name)
         }
 
         static load() {
             Resources.titleImage = Resources.loadImage('title.png')
-            Resources.mapData['act1'] = Resources.loadJson('act1.json')
+            Resources.tilemaps['act1'] = Resources.loadTilemap('act1.json')
+            Resources.spreadsheet = new GoogleSpreadsheet("1y8OUya0OIG5xpHmD2W7xx8lOG-A0Byx8UmSpCEFHd2s")
 
             UI.load()
         }

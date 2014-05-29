@@ -93,9 +93,16 @@
         tilesets: Tileset[] = []
         layers: TilemapLayer[] = []
 
-        constructor(jsonData: crackle.JsonData) {
-            var data: TilemapData = jsonData.data
-            var basePath = jsonData.src.slice(0, jsonData.src.lastIndexOf('/') + 1)
+        constructor(public src: string) {
+            crackle.ResourceQueue.current.loadJson(src, (data: {}) => {
+                this.onJsonLoaded(<TilemapData>data)
+            })
+        }
+
+        get isLoaded() { return !isNaN(this.tileWidth) }
+
+        private onJsonLoaded(data: TilemapData) {
+            var basePath = this.src.slice(0, this.src.lastIndexOf('/') + 1)
 
             this.tileWidth = data.tilewidth
             this.tileHeight = data.tileheight

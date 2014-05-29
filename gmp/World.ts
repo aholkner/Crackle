@@ -47,8 +47,8 @@
         private timeouts: Timeout[] = []
 
         constructor(mapId: string) {
-            if (mapId in Resources.mapData) {
-                this.map = new Tilemap(Resources.mapData[mapId])
+            if (mapId in Resources.tilemaps) {
+                this.map = Resources.tilemaps[mapId]
 
                 this.map.layers.forEach((layer) => {
                     if (!(layer instanceof TilemapObjectLayer))
