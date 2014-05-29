@@ -31,7 +31,8 @@ module gmp {
         }
 
         onInit() {
-            GameData.init()
+            GameData.importGoogleSpreadsheet(Resources.spreadsheet)
+
             this.loadCharacterSprites()
 
             this.player = new Character('Player', 1, [], false)

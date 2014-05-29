@@ -45,6 +45,11 @@
 
             var rows = []
             var headers = cells[0]
+            for (var i = 0; i < colCount; ++i) {
+                if (headers[i])
+                    headers[i] = headers[i].toLowerCase()
+            }
+
             for (var i = 1; i < rowCount; ++i) {
                 var cellRow = cells[i]
                 var row = {}
@@ -56,7 +61,7 @@
                 rows.push(row)
             }
 
-            this.worksheets[title] = rows
+            this.worksheets[title.toLowerCase()] = rows
         }
 
 
