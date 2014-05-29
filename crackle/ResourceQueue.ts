@@ -1,8 +1,10 @@
 ﻿module crackle {
 
     export class ResourceQueue {
-        private loadCount: number = 0
         private loadCompleteCallback
+
+        totalCount: number = 0
+        completedCount: number = 0
 
         private static instances: ResourceQueue[] = []
 
@@ -16,7 +18,7 @@
 
         static pop() {
             var resourceQueue = ResourceQueue.instances.pop()
-            if (resourceQueue.loadCount == 0)
+            if (resourceQueue.completedCount == resourceQueue.totalCount)
                 resourceQueue.loadCompleteCallback && resourceQueue.loadCompleteCallback()
         }
 
@@ -31,15 +33,15 @@
             return ResourceQueue.instances[ResourceQueue.instances.length - 1]
         }
 
-        private decrementLoadCount() {
-            this.loadCount -= 1
-            if (this.loadCount == 0)
+        private incrementCompletedCount() {
+            this.completedCount += 1
+            if (this.completedCount == this.totalCount)
                 this.loadCompleteCallback && this.loadCompleteCallback()
         }
 
         loadImage(image: Image, path: string): HTMLImageElement {
             var img = document.createElement('img')
-            this.loadCount += 1
+            this.totalCount += 1
             img.onload = () => { this.onImageLoaded(image) }
             img.onerror = () => { this.onImageError(image) }
             img.src = path
@@ -50,7 +52,7 @@
             ResourceQueue.push(this)
             image.onLoaded()
             ResourceQueue.pop()
-            this.decrementLoadCount()
+            this.incrementCompletedCount()
         }
 
         private onImageError(image: Image) {
@@ -60,7 +62,7 @@
 
         loadFont(font: Font) {
             if (!font.isLoaded) {
-                this.loadCount += 1
+                this.totalCount += 1
                 window.setTimeout(() => { this.pollFontLoaded(font) }, 100)
             } else {
                 font.onLoaded()
@@ -72,7 +74,7 @@
                 ResourceQueue.push(this)
                 font.onLoaded()
                 ResourceQueue.pop()
-                this.decrementLoadCount()
+                this.incrementCompletedCount()
             } else {
                 window.setTimeout(() => { this.pollFontLoaded(font) }, 100)
             }
@@ -104,7 +106,7 @@
         }
 
         private loadXmlHttpRequest(src: string, callback: { (xhr: XMLHttpRequest) }) {
-            this.loadCount += 1
+            this.totalCount += 1
             var xhr = typeof XMLHttpRequest != 'undefined'
                 ? new XMLHttpRequest()
                 : new ActiveXObject('Microsoft.XMLHTTP');
@@ -115,7 +117,7 @@
                     status = xhr.status;
                     if (status == 200) {
                         callback(xhr)
-                        this.decrementLoadCount()
+                        this.incrementCompletedCount()
                     } else {
                         throw new ResourceNotLoadedException(src)
                     }

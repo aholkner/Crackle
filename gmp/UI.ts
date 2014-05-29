@@ -38,8 +38,11 @@
         static healthBackgroundImage: crackle.Image
         static healthImage: crackle.Image
 
-        static load() {
+        static preload() {
             UI.font = new crackle.Font('tinyfont', 12)
+        }
+
+        static load() {
             UI.image = Resources.loadImage('ui.png')
             UI.statBorder = UI.getBorderTiles(0)
             UI.statBorderDisabled = UI.getBorderTiles(3)

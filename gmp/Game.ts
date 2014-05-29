@@ -13,6 +13,18 @@ module gmp {
         get mapWidth(): number { return Math.floor(this.width / this.mapScale) }
         get mapHeight(): number { return Math.floor(this.height / this.mapScale) }
 
+        onPreload() {
+            UI.preload()
+        }
+
+        onPretick() {
+            var progress = '[ ' + this.resourceQueue.completedCount + ' / ' + this.resourceQueue.totalCount + ' ]'
+            crackle.clear(0.2, 0, 0, 1)
+            crackle.setColor(1, 1, 1, 1)
+            crackle.drawString(UI.font, 'Loading ... ', this.width - 5, this.height - 5, { align: crackle.Align.right, verticalAlign: crackle.VerticalAlign.bottom })
+            crackle.drawString(UI.font, progress, this.width - 5, this.height - UI.font.height, { align: crackle.Align.right, verticalAlign: crackle.VerticalAlign.bottom })
+        }
+
         onLoad() {
             game = this
             Resources.load()
