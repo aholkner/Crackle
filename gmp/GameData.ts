@@ -114,26 +114,45 @@
         price: number
     }
 
+    export var gameData: GameData
+
     export class GameData {
 
-        static questItems: { [key: string]: QuestItem }
-        static effects: { [key: string]: Effect }
-        static attacks: { [key: string]: Attack }
-        static standardAttacks: { [key: string]: Attack[] }
-        static characters: { [key: string]: CharacterTemplate }
-        static encounters: { [key: string]: Encounter }
-        static script: { [trigger: string]: ScriptRow[] }
-        static levels: Level[]
-        static shops: { [key: string]: Shop }
+        questItems: { [key: string]: QuestItem }
+        effects: { [key: string]: Effect }
+        attacks: { [key: string]: Attack }
+        standardAttacks: { [key: string]: Attack[] }
+        characters: { [key: string]: CharacterTemplate }
+        encounters: { [key: string]: Encounter }
+        script: { [trigger: string]: ScriptRow[] }
+        levels: Level[]
+        shops: { [key: string]: Shop }
 
-        static importGoogleSpreadsheet(spreadsheet: GoogleSpreadsheet) {
-            GameData.questItems = GameData.importWorksheetIndex(spreadsheet.worksheets['items'], QuestItem, {
+        static load() {
+            gameData = new GameData()
+
+            var gameDataStorage = localStorage.getItem('gmp.GameData')
+            if (!gameDataStorage) {    
+                var spreadsheet = new GoogleSpreadsheet("1y8OUya0OIG5xpHmD2W7xx8lOG-A0Byx8UmSpCEFHd2s", (spreadsheet) => {
+                    gameData.importGoogleSpreadsheet(spreadsheet)
+                })
+            } else {
+                var values = JSON.parse(gameDataStorage)
+                for (var key in values) {
+                    gameData[key] = values[key]
+                }
+                gameData.link()
+            }
+        }
+
+        private importGoogleSpreadsheet(spreadsheet: GoogleSpreadsheet) {
+            this.questItems = this.importWorksheetIndex(spreadsheet.worksheets['items'], QuestItem, {
                 id: 'id',
                 name: 'name',
                 description: 'description'
             })
 
-            GameData.effects = GameData.importWorksheetIndex(spreadsheet.worksheets['effects'], Effect, {
+            this.effects = this.importWorksheetIndex(spreadsheet.worksheets['effects'], Effect, {
                 id: 'id',
                 abbrv: 'abbrev',
                 applyToSource: 'apply to source',
@@ -150,7 +169,7 @@
                 return effect
             })
 
-            GameData.attacks = GameData.importWorksheetIndex(spreadsheet.worksheets['attacks'], Attack, {
+            this.attacks = this.importWorksheetIndex(spreadsheet.worksheets['attacks'], Attack, {
                 id: 'id',
                 name: 'attack name',
                 description: 'description',
@@ -168,27 +187,23 @@
             }, (attack) => {
                 attack.targetCount = parseInt(attack.targetCount)
                 attack.spinCost = parseInt(attack.spinCost) || 0
-                attack.effects = GameData.convertIdlistToObjlist(attack.effects, GameData.effects)
                 attack.baseDamageMin = parseInt(attack.baseDamageMin)
                 attack.baseDamageMax = parseInt(attack.baseDamageMax)
                 attack.critBaseDamage = parseInt(attack.critBaseDamage)
                 attack.critChanceMin = parseInt(attack.critChanceMin)
                 attack.critChanceMax = parseInt(attack.critChanceMax)
                 attack.weight = parseFloat(attack.weight) || 1
-                attack.healthBenefit = GameData.aiGetHealthBenefit(attack)
-                attack.isRevive = GameData.aiIsReviveAttack(attack)
-                attack.isSummon = GameData.aiIsSummonAttack(attack)
                 return attack
             })
 
-            GameData.standardAttacks = GameData.importWorksheetMultiIndex(spreadsheet.worksheets['standardattacks'], Object, {
+            this.standardAttacks = this.importWorksheetMultiIndex(spreadsheet.worksheets['standardattacks'], Object, {
                 id: 'attackgroup',
                 name: 'attack',
             }, (obj) => {
-                return GameData.attacks[obj.name]
+                return this.attacks[obj.name]
             })
 
-            GameData.characters = GameData.importWorksheetIndex(spreadsheet.worksheets['characters'], CharacterTemplate, {
+            this.characters = this.importWorksheetIndex(spreadsheet.worksheets['characters'], CharacterTemplate, {
                 id: 'id',
                 name: 'name',
                 votesBase: 'votes',
@@ -224,14 +239,10 @@
                 ch.charismaLvl = parseInt(ch.charismaLvl)
                 ch.flairBase = parseInt(ch.flairBase)
                 ch.flairLvl = parseInt(ch.flairLvl)
-                ch.attackGroup = GameData.standardAttacks[ch.attackGroup]
-                ch.immunities = GameData.convertIdlistToObjlist(ch.immunities, GameData.attacks)
-                ch.resistance = GameData.convertIdlistToObjlist(ch.resistance, GameData.attacks)
-                ch.weaknesses = GameData.convertIdlistToObjlist(ch.weaknesses, GameData.attacks)
                 return ch
             })
 
-            GameData.encounters = GameData.importWorksheetIndex(spreadsheet.worksheets['encounters'], Encounter, {
+            this.encounters = this.importWorksheetIndex(spreadsheet.worksheets['encounters'], Encounter, {
                 id: 'id',
                 name: 'name',
                 monster1: 'monster 1',
@@ -248,26 +259,17 @@
                 money: 'money',
                 itemAttackDrops: 'attack drops',
             }, (encounter) => {
-                encounter.monster1 = GameData.characters[encounter.monster1]
                 encounter.monster1Lvl = parseInt(encounter.monster1Lvl)
-                encounter.monster2 = GameData.characters[encounter.monster2]
                 encounter.monster2Lvl = parseInt(encounter.monster2Lvl)
-                encounter.monster3 = GameData.characters[encounter.monster3]
                 encounter.monster3Lvl = parseInt(encounter.monster3Lvl)
-                encounter.monster4 = GameData.characters[encounter.monster4]
                 encounter.monster4Lvl = parseInt(encounter.monster4Lvl)
-                encounter.itemAttacks = GameData.convertIdlistToObjlist(encounter.itemAttacks, GameData.attacks).map((attack) => new ItemAttack(attack, 1))
                 encounter.bribeCost = parseInt(encounter.bribeCost)
                 encounter.xp = parseInt(encounter.xp)
                 encounter.money = parseInt(encounter.money)
-                var itemAttackDrops = []
-                encounter.itemAttackDrops = GameData.convertIdlistToObjlist(encounter.itemAttackDrops, GameData.attacks).forEach((attack) => {
-                    ItemAttack.addAttackToItemAttackList(itemAttackDrops, attack)
-                })
                 return encounter
             })
 
-            GameData.script = GameData.importWorksheetMultiIndex(spreadsheet.worksheets['script'], ScriptRow, {
+            this.script = this.importWorksheetMultiIndex(spreadsheet.worksheets['script'], ScriptRow, {
                 id: 'trigger',
                 action: 'action',
                 param: 'param',
@@ -278,7 +280,7 @@
                 return row
             })
 
-            GameData.levels = GameData.importWorksheetRows(spreadsheet.worksheets['levels'], Level, {
+            this.levels = this.importWorksheetRows(spreadsheet.worksheets['levels'], Level, {
                 level: 'level',
                 xp: 'xp',
                 votes: 'votes',
@@ -293,20 +295,55 @@
                 return level
             })
 
-            GameData.shops = GameData.importWorksheetIndex(spreadsheet.worksheets['shops'], Shop, {
+            this.shops = this.importWorksheetIndex(spreadsheet.worksheets['shops'], Shop, {
                 id: 'id',
                 itemAttack: 'attack item',
                 price: 'price',
             }, (shop) => {
-                shop.itemAttack = GameData.attacks[shop.itemAttack]
                 shop.price = parseInt(shop.price)
                 return shop
             })
+
+            localStorage.setItem('gmp.GameData', JSON.stringify(this))
+            this.link()
         }
 
+        private link() {
+            for (var id in this.attacks) {
+                var attack = this.attacks[id]
+                attack.effects = this.convertIdlistToObjlist(attack.effects, this.effects)
+                attack.healthBenefit = this.aiGetHealthBenefit(attack)
+                attack.isRevive = this.aiIsReviveAttack(attack)
+                attack.isSummon = this.aiIsSummonAttack(attack)
+            }
+            for (var id in this.characters) {
+                var character = this.characters[id]
+                character.attacks = this.standardAttacks[(<any>character).attackGroup]
+                character.immunities = this.convertIdlistToObjlist(character.immunities, this.attacks)
+                character.resistance = this.convertIdlistToObjlist(character.resistance, this.attacks)
+                character.weaknesses = this.convertIdlistToObjlist(character.weaknesses, this.attacks)
+            }
+            for (var id in this.encounters) {
+                var encounter = this.encounters[id]
+                encounter.monster1 = this.characters[<any>encounter.monster1]
+                encounter.monster2 = this.characters[<any>encounter.monster2]
+                encounter.monster3 = this.characters[<any>encounter.monster3]
+                encounter.monster4 = this.characters[<any>encounter.monster4]
+                encounter.itemAttacks = this.convertIdlistToObjlist(encounter.itemAttacks, this.attacks).map((attack) => new ItemAttack(attack, 1))
+                var itemAttackDrops = []
+                this.convertIdlistToObjlist(encounter.itemAttackDrops, this.attacks).forEach((attack) => {
+                    ItemAttack.addAttackToItemAttackList(itemAttackDrops, attack)
+                })
+                encounter.itemAttackDrops = itemAttackDrops
+            }
+            for (var id in this.shops) {
+                var shop = this.shops[id]
+                shop.itemAttack = this.attacks[<any>shop.itemAttack]
+            }
+        }
 
-        private static importWorksheetMultiIndex(worksheet: {}[], cls: new () => any, fields: { [field: string]: string }, transform?: (any) => any): { [key: string]: any[] } {
-            var objects = GameData.importWorksheetRows(worksheet, cls, fields, null)
+        private importWorksheetMultiIndex(worksheet: {}[], cls: new () => any, fields: { [field: string]: string }, transform?: (any) => any): { [key: string]: any[] } {
+            var objects = this.importWorksheetRows(worksheet, cls, fields, null)
             var index: { [key: string]: any[] } = {}
             for (var i = 0; i < objects.length; ++i) {
                 var obj = objects[i]
@@ -320,8 +357,8 @@
             return index
         }
 
-        private static importWorksheetIndex(worksheet: {}[], cls: new () => any, fields: { [field: string]: string }, transform?: (any) => any): { [key: string]: any } {
-            var objects = GameData.importWorksheetRows(worksheet, cls, fields, null)
+        private importWorksheetIndex(worksheet: {}[], cls: new () => any, fields: { [field: string]: string }, transform?: (any) => any): { [key: string]: any } {
+            var objects = this.importWorksheetRows(worksheet, cls, fields, null)
             var index: { [key: string]: any } = {}
             for (var i = 0; i < objects.length; ++i) {
                 var obj = objects[i]
@@ -332,7 +369,7 @@
             return index
         }
 
-        private static importWorksheetRows(worksheet: {}[], cls: new () => any, fields: { [field: string]: string }, transform?: (any) => any): any[] {
+        private importWorksheetRows(worksheet: {}[], cls: new () => any, fields: { [field: string]: string }, transform?: (any) => any): any[] {
             var objects: any[] = []
             for (var i = 0; i < worksheet.length; ++i) {
                 var row = worksheet[i]
@@ -347,7 +384,7 @@
             return objects
         }
 
-        private static convertIdlistToObjlist(value, index) {
+        private convertIdlistToObjlist(value, index) {
             if (!value)
                 return []
 
@@ -361,7 +398,7 @@
             return result
         }
 
-        private static aiGetHealthBenefit(attack: Attack) {
+        private aiGetHealthBenefit(attack: Attack) {
             // get min health benefit
             if (attack.targetType != 'AllFriendly' && attack.targetType != 'None')
                 return 0
@@ -375,7 +412,7 @@
             return h
         }
 
-        private static aiIsReviveAttack(attack: Attack) {
+        private aiIsReviveAttack(attack: Attack) {
             for (var i = 0; i < attack.effects.length; ++i) {
                 var effect = attack.effects[i]
                 if (effect.func == 'revive')
@@ -384,7 +421,7 @@
             return false
         }
 
-        private static aiIsSummonAttack(attack: Attack) {
+        private aiIsSummonAttack(attack: Attack) {
             for (var i = 0; i < attack.effects.length; ++i) {
                 var effect = attack.effects[i]
                 if (effect.func == 'callFriends')

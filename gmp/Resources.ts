@@ -18,7 +18,6 @@
         static load() {
             Resources.titleImage = Resources.loadImage('title.png')
             Resources.tilemaps['act1'] = Resources.loadTilemap('act1.json')
-            Resources.spreadsheet = new GoogleSpreadsheet("1y8OUya0OIG5xpHmD2W7xx8lOG-A0Byx8UmSpCEFHd2s")
 
             UI.load()
         }

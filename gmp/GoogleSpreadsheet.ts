@@ -2,10 +2,16 @@
 
     export class GoogleSpreadsheet {
 
+
         worksheets: { [name: string]: Object[] } = {}
 
-        constructor(public key: string) {
+        private callback: { (spreadsheet: GoogleSpreadsheet) }
+        private worksheetTotalCount: number = 0
+        private worksheetLoadedCount: number = 0
+
+        constructor(public key: string, callback?: { (spreadsheet: GoogleSpreadsheet) }) {
             var src = 'http://spreadsheets.google.com/feeds/worksheets/' + this.key + '/public/full?alt=json'
+            this.callback = callback
             crackle.ResourceQueue.current.loadJson(src, (worksheetList: {}) => {
                 this.onWorksheetListLoaded(worksheetList)
             })
@@ -17,13 +23,24 @@
                 var title = entry.title["$t"]
                 entry.link.forEach((link) => {
                     if (link.rel == "http://schemas.google.com/spreadsheets/2006#cellsfeed") {
+                        this.worksheetTotalCount += 1
                         var href: string = link.href + '?alt=json'
                         crackle.ResourceQueue.current.loadJson(href, (data) => {
                             this.onWorksheetLoaded(title, data)
+                            this.worksheetLoadedCount += 1
+                            this.checkLoaded()
                         })
                     }
                 })
             })
+
+            this.checkLoaded()
+        }
+
+        private checkLoaded() {
+            if (this.worksheetLoadedCount == this.worksheetTotalCount) {
+                this.callback && this.callback(this)
+            }
         }
 
         private onWorksheetLoaded(title: string, data: any) {
