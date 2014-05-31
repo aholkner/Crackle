@@ -5,8 +5,6 @@ module gmp {
     export class MapWorld extends World {
 
         private moveTimeout: number = -1
-
-        private playerSprite: Sprite
         
         constructor(mapId: string) {
             super(mapId)
@@ -14,8 +12,6 @@ module gmp {
             var playerSlot = this.playerSlots[0]
             if (playerSlot != null)
                 this.playerSprite = this.addSprite(game.player.image, playerSlot.x, playerSlot.y, 'Player')
-
-            this.doDialog(null, 'Good morning, Phil Mossman')
         }
 
         update() {
@@ -128,8 +124,8 @@ module gmp {
         }
 
         onCollide(other: Sprite) {
-            //if (other.name in gameData.script)
-            //    this.runScript(other, other.name)
+            if (other.name in gameData.script)
+                this.runScript(other, other.name)
         }
 
         updateCamera() {

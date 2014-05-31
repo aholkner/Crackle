@@ -13,6 +13,11 @@ module gmp {
         get mapWidth(): number { return Math.floor(this.width / this.mapScale) }
         get mapHeight(): number { return Math.floor(this.height / this.mapScale) }
 
+        questFlags: {} = {}
+        questVars: {} = {}
+        questItems: QuestItem[] = []
+        money: number
+
         onPreload() {
             UI.preload()
         }
@@ -59,6 +64,10 @@ module gmp {
             return false // TODO
         }
 
+        saveCheckpoint(trigger: string): boolean {
+            return false; // TODO
+        }
+
         get world(): World {
             return this.worldStack[this.worldStack.length - 1]
         }
@@ -85,7 +94,7 @@ module gmp {
 
             this.worldStack.splice(0)
             this.pushWorld(world)
-            // TODO world.runScript(null, mapId)
+            world.runScript(null, mapId)
         }
 
         onTick() {
@@ -119,7 +128,9 @@ module gmp {
             }
         }
 
-
+        getAlly(id: string): Character {
+            return this.allies.findFirst((character) => character.id == id)
+        }
     }
 
     export var game: Game
