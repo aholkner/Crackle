@@ -298,7 +298,7 @@
                 game.money += parseInt(param)
                 return this.doDialog(null, dialog)
             } else if (action == 'RequireItem' || action == 'RequireItemMessage' || action == 'RequireItemPlayerSay') {
-                if (param in game.questItems.map((item) => item.id) || Debug.disableRequire) {
+                if (game.questItems.findFirst((item) => item.id == param) || Debug.disableRequire) {
                     return false // satisfied, move to next line immediately
                 } else {
                     var dialogSprite;
