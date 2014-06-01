@@ -7,6 +7,8 @@
 
     findFirst(predicate: { (p: T): boolean }): T
     last(): T
+
+    weightedChoice(weightFunc: { (element: T): number }): T
 }
 
 Array.prototype.remove = function (elem) {
@@ -49,4 +51,16 @@ Array.prototype.findFirst = function (predicate) {
 
 Array.prototype.last = function () {
     return this[this.length - 1]
+}
+
+Array.prototype.weightedChoice = function (weightFunc) {
+    var total = this.sum((elem) => weightFunc(elem))
+    var r = Math.random() * total
+    var upto = 0
+    for (var i = 0; i < this.length; ++i) {
+        upto += weightFunc(this[i])
+        if (upto > r)
+            return this[i]
+    }
+    return this.last()
 }

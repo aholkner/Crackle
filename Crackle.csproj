@@ -54,6 +54,8 @@
     <TypeScriptCompile Include="examples\SampleNearest.ts" />
     <TypeScriptCompile Include="examples\TransformRotate.ts" />
     <TypeScriptCompile Include="gmp\Character.ts" />
+    <TypeScriptCompile Include="gmp\CombatMenu.ts" />
+    <TypeScriptCompile Include="gmp\CombatWorld.ts" />
     <TypeScriptCompile Include="gmp\Core.ts" />
     <TypeScriptCompile Include="gmp\Debug.ts" />
     <TypeScriptCompile Include="gmp\ArrayExtensions.ts" />

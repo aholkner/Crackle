@@ -142,8 +142,10 @@
                 for (var col = 0; col < cols; ++col) {
                     var tileImage = image.getRegion(col * tw, row * th, (col + 1) * tw, (row + 1) * th)
                     var tile = new Tile(tileImage)
-                    if (tileIndex in tilesetData.tileproperties)
-                        tile.properties = tilesetData.tileproperties[tileIndex]
+                    if (tilesetData.tileproperties) {
+                        if (tileIndex in tilesetData.tileproperties)
+                            tile.properties = tilesetData.tileproperties[tileIndex]
+                    }
                     tileset.tiles.push(tile)
                     ++tileIndex
                 }

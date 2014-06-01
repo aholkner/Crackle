@@ -18,6 +18,7 @@
         static load() {
             Resources.titleImage = Resources.loadImage('title.png')
             Resources.tilemaps['act1'] = Resources.loadTilemap('act1.json')
+            Resources.tilemaps['combat1'] = Resources.loadTilemap('combat1.json')
 
             UI.load()
         }

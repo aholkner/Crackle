@@ -6,7 +6,7 @@
         }
 
         static disableCollision: boolean
-        static disableRequire: boolean
+        static disableRequire: boolean = true
     }
 
 }

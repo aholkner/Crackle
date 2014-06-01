@@ -7,6 +7,7 @@
     }
 
     export class Effect {
+        id: string
         abbrv: string
         applyToSource: boolean
         func: string
@@ -62,13 +63,13 @@
     export class Encounter {
         id: string
         name: string
-        monster1: CharacterTemplate
+        monster1: string
         monster1Lvl: number
-        monster2: CharacterTemplate
+        monster2: string
         monster2Lvl: number
-        monster3: CharacterTemplate
+        monster3: string
         monster3Lvl: number
-        monster4: CharacterTemplate
+        monster4: string
         monster4Lvl: number
         itemAttacks: ItemAttack[]
         bribeCost: number
@@ -97,6 +98,18 @@
                 }
             }
             itemAttacks.push(new ItemAttack(attack, 1))
+        }
+
+        static removeAttackFromItemAttackList(itemAttacks: ItemAttack[], attack: Attack) {
+            for (var i = 0; i < itemAttacks.length; ++i) {
+                var ia = itemAttacks[i];
+                if (ia.attack == attack) {
+                    ia.quantity -= 1
+                    if (ia.quantity == 0)
+                        itemAttacks.splice(i, 1)
+                    return
+                }
+            }
         }
     }
 
@@ -199,8 +212,6 @@
             this.standardAttacks = this.importWorksheetMultiIndex(spreadsheet.worksheets['standardattacks'], Object, {
                 id: 'attackgroup',
                 name: 'attack',
-            }, (obj) => {
-                return this.attacks[obj.name]
             })
 
             this.characters = this.importWorksheetIndex(spreadsheet.worksheets['characters'], CharacterTemplate, {
@@ -220,7 +231,7 @@
                 charismaLvl: 'cha lvl',
                 flairBase: 'flr',
                 flairLvl: 'flr lvl',
-                attackGroup: 'attackGroup',
+                attackGroup: 'attackgroup',
                 immunities: 'immunities',
                 resistance: 'resistance',
                 weaknesses: 'weaknesses'
@@ -316,19 +327,18 @@
                 attack.isRevive = this.aiIsReviveAttack(attack)
                 attack.isSummon = this.aiIsSummonAttack(attack)
             }
+            for (var id in this.standardAttacks) {
+                this.standardAttacks[id] = this.standardAttacks[id].map((sa) => this.attacks[(<any>sa).name])
+            }
             for (var id in this.characters) {
                 var character = this.characters[id]
-                character.attacks = this.standardAttacks[(<any>character).attackGroup]
+                character.attacks = this.standardAttacks[(<any>character).attackGroup] || []
                 character.immunities = this.convertIdlistToObjlist(character.immunities, this.attacks)
                 character.resistance = this.convertIdlistToObjlist(character.resistance, this.attacks)
                 character.weaknesses = this.convertIdlistToObjlist(character.weaknesses, this.attacks)
             }
             for (var id in this.encounters) {
                 var encounter = this.encounters[id]
-                encounter.monster1 = this.characters[<any>encounter.monster1]
-                encounter.monster2 = this.characters[<any>encounter.monster2]
-                encounter.monster3 = this.characters[<any>encounter.monster3]
-                encounter.monster4 = this.characters[<any>encounter.monster4]
                 encounter.itemAttacks = this.convertIdlistToObjlist(encounter.itemAttacks, this.attacks).map((attack) => new ItemAttack(attack, 1))
                 var itemAttackDrops = []
                 this.convertIdlistToObjlist(encounter.itemAttackDrops, this.attacks).forEach((attack) => {

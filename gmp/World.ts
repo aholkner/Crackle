@@ -265,7 +265,7 @@
                 this.questName = dialog
                 return false
             } else if (action == 'Encounter') {
-                //game.pushWorld(new CombatWorld('combat1', param))
+                game.pushWorld(new CombatWorld('combat1', param))
             } else if (action == 'Destroy') {
                 this.sprites.remove(sprite)
                 return false
