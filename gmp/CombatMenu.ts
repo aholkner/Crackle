@@ -43,7 +43,7 @@ module gmp {
         }
 
         onDefense() {
-            this.combatWorld.actionAttack(gameData.attacks['defense'], [])
+            this.combatWorld.actionAttack(gameData.attacks['DEFENSE'], [])
         }
 
         onSpin() {

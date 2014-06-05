@@ -45,7 +45,7 @@ module gmp {
             else if (effect.func == 'revive') {
                 character.votes = Math.floor(character.maxVotes * effect.value);
                 (<CombatWorld>game.world).setDead(character, false);
-                (<CombatWorld>game.world).addFloater(character, 'revived!', UI.floaterBorderGrey)
+                (<CombatWorld>game.world).addFloater(character, 'Revived!', UI.floaterBorderGrey)
             } else if (effect.func == 'callFriends') {
                 var p = effect.attribute.split(':')
                 var characterId = p[0]
@@ -325,18 +325,18 @@ module gmp {
             // filter health gain attacks
             var healthTargets = monsters.filter((character) => !character.dead && character.votes < character.maxVotes)
             var healthGainMax = 0
-            if (healthTargets)
+            if (healthTargets.length > 0)
                 healthGainMax = healthTargets.max((character) => character.maxVotes - character.votes)
             attacks = attacks.filter((attack) => attack.healthBenefit <= healthGainMax)
 
             // filter revive attacks
             var reviveTargets = monsters.filter((monster) => monster.dead)
-            if (!reviveTargets)
+            if (reviveTargets.length == 0)
                 attacks = attacks.filter((attack) => !attack.isRevive)
 
             // filter summon attacks
             var canSummon = reviveTargets.length > 0 || monsters.length < this.monsterSlots.length
-            if (!canSummon)
+            if (canSummon)
                 attacks = attacks.filter((attack) => !attack.isSummon)
 
             // random choice of attack
@@ -388,9 +388,11 @@ module gmp {
             }
             // choose slot randomly
             if (slotIndex == -1)
-                slotIndex = Math.floor(Math.random() * (maxSlotIndex + 1))
+                slotIndex = Math.randrangeint(0, maxSlotIndex)
 
-            var targets = this.slots.slice(slotIndex, slotIndex + targetCount).map((slot) => slot.character)
+            var targets = slots.slice(slotIndex, slotIndex + targetCount).map((slot) => slot.character)
+            if (targets.length == 0 || !targets[0])
+                throw new AssertException('')
 
             this.actionAttack(attack, targets)
         }
@@ -470,7 +472,7 @@ module gmp {
             var criticalFailEffect = null
             for (var i = 0; i < attack.effects.length; ++i) {
                 var effect = attack.effects[i]
-                if (effect.id == 'critical fail')
+                if (effect.id == 'Critical Fail')
                     criticalFailEffect = effect
                 else {
                     var rounds = Math.randrangeint(effect.roundsMin, effect.roundsMax + 1)
@@ -489,7 +491,7 @@ module gmp {
 
                 // immunity
                 if (target.data.immunities.indexOf(attack) != -1) {
-                    this.addFloater(target, 'immune', UI.floaterBorderGrey)
+                    this.addFloater(target, 'Immune', UI.floaterBorderGrey)
                     console.log(target.id + ' is immune to ' + attack.name)
                     continue
                 }
@@ -508,7 +510,7 @@ module gmp {
                 // damage
                 var damage: number
                 if (critSuccess) {
-                    this.addFloater(target, 'critical hit!', UI.floaterBorderGrey, floaterOffset)
+                    this.addFloater(target, 'Critical Hit!', UI.floaterBorderGrey, floaterOffset)
                     floaterOffset += 1
                     console.log('critical hit')
                     damage = baseStat + (attack.critBaseDamage + modifiers)
@@ -522,19 +524,19 @@ module gmp {
 
                     // resistance and weakness
                     if (target.data.resistance.indexOf(attack) != -1) {
-                        this.addFloater(target, 'resist', UI.floaterBorderGrey, floaterOffset)
+                        this.addFloater(target, 'Resist', UI.floaterBorderGrey, floaterOffset)
                         floaterOffset += 1
                         console.log(target.id + ' is resistant to ' + attack.name)
                         damage -= damage * 0.3
                     } else if (target.data.weaknesses.indexOf(attack) != -1) {
-                        this.addFloater(target, 'weakness', UI.floaterBorderGrey, floaterOffset)
+                        this.addFloater(target, 'Weakness', UI.floaterBorderGrey, floaterOffset)
                         floaterOffset += 1
                         console.log(target.id + ' is weak to ' + attack.name)
                         damage += damage * 0.3
                     }
                     // global resistance (defense)
                     if (target.resistance) {
-                        this.addFloater(target, 'defends', UI.floaterBorderGrey, floaterOffset)
+                        this.addFloater(target, 'Defends', UI.floaterBorderGrey, floaterOffset)
                         floaterOffset += 1
                         console.log(target.id + ' defends')
                     }
@@ -574,7 +576,7 @@ module gmp {
                 rounds = Math.randrangeint(effect.roundsMin, criticalFailEffect.roundsMax + 1)
                 if (effect.applyToSource) {
                     source.addActiveEffect(new ActiveEffect(criticalFailEffect, rounds))
-                    this.addFloater(source, 'critical fail', UI.floaterBorderGrey)
+                    this.addFloater(source, 'Critical Fail', UI.floaterBorderGrey)
                 }
             }
 
