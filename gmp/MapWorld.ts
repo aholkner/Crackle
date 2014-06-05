@@ -49,11 +49,11 @@ module gmp {
                 dy += 1
             this.move(dx, dy)
 
-            //if (key == crackle.Key.esc)
-            //    this.pushMenu(new MapMenu(this))
+            if (key == crackle.Key.esc)
+                this.pushMenu(new MapMenu(this))
         }
 
-        onKeyreleased(key: crackle.Key) {
+        onKeyReleased(key: crackle.Key) {
             this.moveTimeout = -1
         }
 

@@ -378,7 +378,7 @@
             } else if (action == 'BeginCombat') {
                 this.beginRound()
             } else if (action == 'Shop') {
-                // this.pushMenu(new ShopMenu(param)) TODO
+                this.pushMenu(new ShopMenu(this, param))
                 return true
             } else if (action == 'Label') {
                 return false
@@ -409,9 +409,8 @@
                 }
                 if (action == 'CheatXP') {
                     character.xp = value
-                    // TODO character.level = getLevelForXp(game.player.xp)
-                    // TODO levelRow = getLevelRow(character.level)
-                    var levelRow: Level
+                    character.level = gameData.getLevelForXP(game.player.xp)
+                    var levelRow = gameData.levels[character.level - 1]
                     character.maxSpin = levelRow.spin
                     character.maxVotes = levelRow.votes
                 } else if (action == 'CheatCunning') {
@@ -454,7 +453,8 @@
             }
 
             if (this.menuStack.length > 0) {
-                this.menuStack[this.menuStack.length - 1].onKeyPressed(key)
+                this.menuStack.last().onKeyPressed(key)
+                return
             }
 
             this.onWorldKeyPressed(key)

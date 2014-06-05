@@ -139,12 +139,15 @@
         encounters: { [key: string]: Encounter }
         script: { [trigger: string]: ScriptRow[] }
         levels: Level[]
-        shops: { [key: string]: Shop }
+        shops: { [key: string]: Shop[] }
 
         static load() {
             gameData = new GameData()
 
-            var gameDataStorage = localStorage.getItem('gmp.GameData')
+            var gameDataStorage
+            if (window.location.hash.indexOf('import') == -1)
+                gameDataStorage = localStorage.getItem('gmp.GameData')
+
             if (!gameDataStorage) {    
                 var spreadsheet = new GoogleSpreadsheet("1y8OUya0OIG5xpHmD2W7xx8lOG-A0Byx8UmSpCEFHd2s", (spreadsheet) => {
                     gameData.importGoogleSpreadsheet(spreadsheet)
@@ -306,7 +309,7 @@
                 return level
             })
 
-            this.shops = this.importWorksheetIndex(spreadsheet.worksheets['shops'], Shop, {
+            this.shops = this.importWorksheetMultiIndex(spreadsheet.worksheets['shops'], Shop, {
                 id: 'id',
                 itemAttack: 'attack item',
                 price: 'price',
@@ -347,8 +350,10 @@
                 encounter.itemAttackDrops = itemAttackDrops
             }
             for (var id in this.shops) {
-                var shop = this.shops[id]
-                shop.itemAttack = this.attacks[<any>shop.itemAttack]
+                var wares = this.shops[id]
+                wares.forEach((ware) => {
+                    ware.itemAttack = this.attacks[<any>ware.itemAttack]
+                })
             }
         }
 
