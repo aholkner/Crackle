@@ -286,7 +286,7 @@ module gmp {
             if (this.activeScript)
                 this.continueScript()
             else {
-                // TODO game.pushWorld(new WinCombatWorld(this))
+                game.pushWorld(new WinCombatWorld(this))
             }
         }
 
@@ -300,12 +300,12 @@ module gmp {
         }
 
         lose() {
-            // TODO this.pushMenu(new GameOverMenu(this))
+            this.pushMenu(new GameOverMenu(this))
         }
 
         onDismissDialog() {
             if (!this.activeScript) {
-                // TODO game.pushWorld(new WinCombatWorld(this))
+                game.pushWorld(new WinCombatWorld(this))
             }
             super.onDismissDialog()
         }
@@ -352,7 +352,7 @@ module gmp {
             else if (targetType == 'DeadFriendly')
                 slots = this.monsterSlots.filter((slot) => slot.character && slot.character.dead)
             else if (targetType == 'All')
-                slots = this.slots.filter((slot) => slot.character && slot.character.dead)
+                slots = this.slots.filter((slot) => slot.character && !slot.character.dead)
             else if (targetType == 'None')
                 slots = [this.getSlot(source)]
             else

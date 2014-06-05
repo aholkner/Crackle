@@ -440,6 +440,13 @@
             return false
         }
 
+        getLevelForXP(xp: number): number {
+            for (var i = 0; i < this.levels.length; ++i) {
+                if (xp < this.levels[i].xp)
+                    return i;
+            }
+            return this.levels.length - 1;
+        }
     }
 
 }

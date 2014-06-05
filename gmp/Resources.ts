@@ -19,6 +19,8 @@
             Resources.titleImage = Resources.loadImage('title.png')
             Resources.tilemaps['act1'] = Resources.loadTilemap('act1.json')
             Resources.tilemaps['combat1'] = Resources.loadTilemap('combat1.json')
+            Resources.tilemaps['ui_win_combat'] = Resources.loadTilemap('ui_win_combat.json')
+            Resources.tilemaps['ui_levelup'] = Resources.loadTilemap('ui_levelup.json')
 
             UI.load()
         }
