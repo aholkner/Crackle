@@ -211,10 +211,10 @@
                     y += padding
                     crackle.setColor(1, 1, 1, 1)
                     crackle.drawString(UI.font, character.data.name, x, y)
-                    crackle.drawString(UI.font, 'lvl: ' + character.level, x, y + lineHeight)
-                    crackle.drawString(UI.font, 'xp: ' + character.xp + '/' + gameData.levels[character.level].xp, x, y + lineHeight * 2)
-                    crackle.drawString(UI.font, 'votes: ' + character.votes + '/' + character.maxVotes, x, y + lineHeight * 3)
-                    crackle.drawString(UI.font, 'spin: ' + character.spin + '/' + character.maxSpin, x, y + lineHeight * 4)
+                    crackle.drawString(UI.font, 'Lvl: ' + character.level, x, y + lineHeight)
+                    crackle.drawString(UI.font, 'XP: ' + character.xp + '/' + gameData.levels[character.level].xp, x, y + lineHeight * 2)
+                    crackle.drawString(UI.font, 'Votes: ' + character.votes + '/' + character.maxVotes, x, y + lineHeight * 3)
+                    crackle.drawString(UI.font, 'Spin: ' + character.spin + '/' + character.maxSpin, x, y + lineHeight * 4)
                 }
             }
         }
