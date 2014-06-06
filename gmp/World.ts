@@ -165,16 +165,58 @@
             }
         }
 
+        getQuestName() {
+            return this.questName
+        }
+
+        getRoomName() {
+            return ''
+        }
+
         drawMenu() {
             this.menuStack.map((menu) => { menu.draw() })
         }
 
         drawHud() {
-            // TODO
+            UI.drawBox(new Rect(0, 0, game.width, UI.font.height), UI.statBorder)
+            crackle.drawString(UI.font, this.getQuestName(), 0, 0, { align: crackle.Align.left, verticalAlign: crackle.VerticalAlign.top })
+            crackle.drawString(UI.font, this.getRoomName(), game.width / 2, 0, { align: crackle.Align.center, verticalAlign: crackle.VerticalAlign.top })
+            crackle.drawString(UI.font, '$' + game.money, game.width, 0, { align: crackle.Align.right, verticalAlign: crackle.VerticalAlign.top })
         }
 
         drawStats() {
-            // TODO
+            var margin = 4
+            var padding = 4
+            var boxWidth = game.width / 4 - margin * 2
+            var boxHeight = UI.font.height * 5 + padding * 2
+            var lineHeight = UI.font.height
+
+            for (var i = 0; i < 4; ++i) {
+                var character = i < game.allies.length ? game.allies[i] : null
+                var border: crackle.Image[]
+                if (!character)
+                    border = UI.statBorderDisabled
+                else if (character == this.currentCharacter)
+                    border = UI.statBorderActive
+                else
+                    border = UI.statBorder
+
+                var x = margin + i * (boxWidth + margin * 2)
+                var y = game.height - boxHeight - margin
+                UI.drawBox(new Rect(x, y, x + boxWidth, y + boxHeight), border)
+
+                if (character) {
+                    y -= UI.font.ascent
+                    x += padding
+                    y += padding
+                    crackle.setColor(1, 1, 1, 1)
+                    crackle.drawString(UI.font, character.data.name, x, y)
+                    crackle.drawString(UI.font, 'lvl: ' + character.level, x, y + lineHeight)
+                    crackle.drawString(UI.font, 'xp: ' + character.xp + '/' + gameData.levels[character.level].xp, x, y + lineHeight * 2)
+                    crackle.drawString(UI.font, 'votes: ' + character.votes + '/' + character.maxVotes, x, y + lineHeight * 3)
+                    crackle.drawString(UI.font, 'spin: ' + character.spin + '/' + character.maxSpin, x, y + lineHeight * 4)
+                }
+            }
         }
 
         // Menu

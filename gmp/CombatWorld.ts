@@ -607,7 +607,7 @@ module gmp {
         }
 
         awardSpin(target: Character, damage: number) {
-            var bonus = (damage + target.accumulatedSpinDamage + Math.max(target.wit, 0)) / 5
+            var bonus = Math.floor((damage + target.accumulatedSpinDamage + Math.max(target.wit, 0))) / 5
             if (bonus <= 0)
                 target.accumulatedSpinDamage += damage
             else
