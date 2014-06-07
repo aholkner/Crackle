@@ -5,6 +5,7 @@ module gmp {
     export class MapWorld extends World {
 
         private moveTimeout: number = -1
+        private roomsLayer: TilemapObjectLayer
         
         constructor(mapId: string) {
             super(mapId)
@@ -12,6 +13,29 @@ module gmp {
             var playerSlot = this.playerSlots[0]
             if (playerSlot != null)
                 this.playerSprite = this.addSprite(game.player.image, playerSlot.x, playerSlot.y, 'Player')
+
+            this.map.layers.forEach((layer) => {
+                if (layer.name == 'Rooms' && layer instanceof TilemapObjectLayer)
+                    this.roomsLayer = <TilemapObjectLayer>layer
+            })
+        }
+
+        getRoomName() {
+            if (!this.roomsLayer)
+                return ''
+
+            var x = this.playerSprite.x * this.tileSize
+            var y = this.playerSprite.y * this.tileSize
+            for (var i = 0; i < this.roomsLayer.objects.length; ++i) {
+                var room = this.roomsLayer.objects[i]
+                if (x >= room.x && y >= room.y &&
+                    x < room.x + room.width &&
+                    y < room.y + room.height) {
+                    return room.name
+                }
+            }
+
+            return ''
         }
 
         update() {

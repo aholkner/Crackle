@@ -75,6 +75,8 @@
     export class TilemapObject {
         x: number
         y: number
+        width: number
+        height: number
         name: string
         tile: Tile
         properties: { [key: string]: any }
@@ -161,6 +163,8 @@
                 var obj = new TilemapObject()
                 obj.x = objectData.x
                 obj.y = objectData.y
+                obj.width = objectData.width
+                obj.height = objectData.width
                 obj.name = objectData.name
                 obj.tile = this.getTile(objectData.gid)
                 obj.properties = objectData.properties
