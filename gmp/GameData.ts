@@ -144,20 +144,17 @@
         static load() {
             gameData = new GameData()
 
-            var gameDataStorage
-            if (window.location.hash.indexOf('import') == -1)
-                gameDataStorage = localStorage.getItem('gmp.GameData')
-
-            if (!gameDataStorage) {    
+            if (crackle.args['import']) {
                 var spreadsheet = new GoogleSpreadsheet("1y8OUya0OIG5xpHmD2W7xx8lOG-A0Byx8UmSpCEFHd2s", (spreadsheet) => {
                     gameData.importGoogleSpreadsheet(spreadsheet)
                 })
             } else {
-                var values = JSON.parse(gameDataStorage)
-                for (var key in values) {
-                    gameData[key] = values[key]
-                }
-                gameData.link()
+                crackle.ResourceQueue.current.loadJson('gmp/res/gamedata.json', (values) => {
+                    for (var key in values) {
+                        gameData[key] = values[key]
+                    }
+                    gameData.link()
+                })
             }
         }
 
@@ -318,11 +315,15 @@
                 return shop
             })
 
-            localStorage.setItem('gmp.GameData', JSON.stringify(this))
             this.link()
         }
 
         private link() {
+            if (crackle.args['export']) {
+                var blob = new Blob([JSON.stringify(this)], { type: 'text/json' })
+                navigator.msSaveBlob(blob, 'gamedata.json')
+            }
+
             for (var id in this.attacks) {
                 var attack = this.attacks[id]
                 attack.effects = this.convertIdlistToObjlist(attack.effects, this.effects)

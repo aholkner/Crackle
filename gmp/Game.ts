@@ -44,8 +44,8 @@ module gmp {
             this.player = new Character('Player', 1, [], false)
             this.allies = [this.player]
 
-            var startMap = document.location.search.substring(1)
-            if (startMap.length == 0)
+            var startMap = crackle.args['map']
+            if (!startMap)
                 startMap = 'title'
             this.gotoMap(startMap)
         }

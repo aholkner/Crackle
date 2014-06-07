@@ -15,7 +15,7 @@
         
         constructor(element: HTMLElement) {
             init()
-
+            
             this.isLoaded = false
             this.element = element
             this.canvas = document.createElement("canvas")
