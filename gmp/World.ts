@@ -32,7 +32,7 @@
         activeScriptSprite: Sprite
         mapScriptSprite: Sprite
         currentCharacter: Character
-        questName: string
+        questName: string = ''
 
         tileSize: number = 8
         cameraX: number = 0
