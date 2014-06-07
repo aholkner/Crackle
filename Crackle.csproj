@@ -60,6 +60,7 @@
     <TypeScriptCompile Include="gmp\Core.ts" />
     <TypeScriptCompile Include="gmp\Debug.ts" />
     <TypeScriptCompile Include="gmp\ArrayExtensions.ts" />
+    <TypeScriptCompile Include="gmp\EndWorld.ts" />
     <TypeScriptCompile Include="gmp\GameData.ts" />
     <TypeScriptCompile Include="gmp\MapMenu.ts" />
     <TypeScriptCompile Include="gmp\MapWorld.ts" />

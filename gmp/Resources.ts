@@ -3,6 +3,7 @@
     export class Resources {
 
         static titleImage: crackle.Image
+        static endImage: crackle.Image
         static tilemaps: { [mapId: string]: Tilemap } = {}
         static characterImages: { [name: string]: crackle.Image } = {} 
         static spreadsheet: GoogleSpreadsheet
@@ -17,6 +18,7 @@
 
         static load() {
             Resources.titleImage = Resources.loadImage('title.png')
+            Resources.endImage = Resources.loadImage('end.png')
             var maps = [
                 'act1',
                 'act2',

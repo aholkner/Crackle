@@ -89,6 +89,8 @@ module gmp {
                 world = this.mapWorlds[mapId]
             else if (mapId == 'title')
                 world = new TitleWorld(mapId)
+            else if (mapId == 'end')
+                world = new EndWorld(mapId)
             else
                 world = new MapWorld(mapId)
 
