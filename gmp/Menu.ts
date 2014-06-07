@@ -46,7 +46,7 @@ module gmp {
         }
 
         get visibleItems(): MenuItem[]{
-            return this.items.slice(this.scrollOffset, this.visibleItemCount)
+            return this.items.slice(this.scrollOffset, this.scrollOffset + this.visibleItemCount)
         }
 
         layout() {
@@ -142,7 +142,7 @@ module gmp {
                 if (i == this.selectedIndex + this.scrollOffset)
                     infoY = y
 
-                this.activateMenuItemColor(i == this.selectedIndex + this.scrollOffset, item.enabled)
+                this.activateMenuItemColor(i == this.selectedIndex - this.scrollOffset, item.enabled)
                 crackle.drawString(UI.font, item.name, x, y, { align: align, verticalAlign: crackle.VerticalAlign.top })
                 y += UI.font.height
             }
