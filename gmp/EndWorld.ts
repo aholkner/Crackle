@@ -7,7 +7,7 @@ module gmp {
 
         constructor(mapId: string) {
             super(mapId)
-            // TODO game.playMusic('res/wwing2.ogg')
+            game.playMusic('gmp/res/wwing2.mp3')
         }
 
         private out(text: string) {

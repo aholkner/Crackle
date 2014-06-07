@@ -10,6 +10,7 @@ module gmp {
             this.canDismiss = false
             this.enableInfo = false
             this.y = game.height - 70
+            game.playMusic('gmp/res/wwing.mp3')
         }
 
         onNewGame() {

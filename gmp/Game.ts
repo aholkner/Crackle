@@ -4,6 +4,8 @@ module gmp {
 
     export class Game extends crackle.Game {
 
+        music: crackle.Sound
+
         worldStack: World[] = []
         mapWorlds: { [mapId: string]: World } = {}
         player: Character
@@ -99,6 +101,13 @@ module gmp {
             this.worldStack.splice(0)
             this.pushWorld(world)
             world.runScript(null, mapId)
+        }
+
+        playMusic(src: string) {
+            if (this.music != null)
+                this.music.stop()
+            this.music = new crackle.Sound(src)
+            this.music.play()
         }
 
         onTick() {

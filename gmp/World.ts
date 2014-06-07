@@ -439,7 +439,7 @@
                 else
                     this.doDialog(null, 'Error saving game, progress will be lost on exit')
             } else if (action == 'PlaySound') {
-                // TODO
+                game.playMusic('gmp/res/' + param + '.mp3')
                 return false
             } else if (action in ['CheatXP', 'CheatCunning', 'CheatWit', 'CheatFlair', 'CheatSpeed', 'CheatCharisma']) {
                 var character = game.player
