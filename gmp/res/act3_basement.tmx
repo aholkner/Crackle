@@ -7,14 +7,6 @@
    eJzt0r0KgzAUhuFzS1orqFXQqEP37B0LCnr/U7/hBEMk1vy4OTxkystJODUR1bcgCaQRPLjXwCeCimcb4Q0TnzYLfC1m7hUgodROm/XEfMWfxt077rXw1OR8N4POkaD9To/c62GgbUdd6XujSH6Db8/8r5Ce+kfz/4Rnz5zzFdhRGu75vvPq3lXvjdWLPV9o7wcHx3sf
   </data>
  </layer>
- <layer name="Sprites" width="20" height="24">
-  <properties>
-   <property name="sprite" value="1"/>
-  </properties>
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMFSA5kA7YBRQDQAAUSwAKg==
-  </data>
- </layer>
  <objectgroup name="NPCs" width="20" height="24">
   <object name="JointChief1" gid="21" x="40" y="64"/>
   <object name="JointChief2" gid="21" x="56" y="64"/>
@@ -24,6 +16,7 @@
   <object name="StairsToWhiteHouse" gid="31" x="40" y="160"/>
   <object name="Marketing5" gid="28" x="24" y="128"/>
   <object name="DoorToNotbad" gid="26" x="24" y="56"/>
+  <object gid="41" x="40" y="152"/>
  </objectgroup>
  <objectgroup name="Rooms" width="20" height="24" visible="0"/>
 </map>

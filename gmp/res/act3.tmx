@@ -8,14 +8,6 @@
    eJzt0rkOwjAQRVF/dMISIBBSUCMqoGArQKKAT+QhGWmEbDF2nAygKY6Syne8lMaYHSyhcFjBPpJvzZcxDIX7pWB/9AV9yfOX7nPu/wQX607+OQ4J+s/9HyOlev+S/dsf75++/zVsHLYN+teA/fvEtrnnX8HcIbffXoP+mazlUsPkgypyhoy5PkfoDCnboTO00aYz5J45MnvXbbXf5+jDwhp01KWmpD/ruK197Wtf+9r//f4DBAcbNg==
   </data>
  </layer>
- <layer name="Sprites" width="32" height="32">
-  <properties>
-   <property name="sprite" value="1"/>
-  </properties>
-  <data encoding="base64" compression="zlib">
-   eJztzjENAAAIA7DZwb9BHOwi4WkVNAEAAJr5DgAcWNSsACo=
-  </data>
- </layer>
  <layer name="Props" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztk80OwiAMgPtKuqgxzt+LoiZezQ6KntT3fwBLAhEbGLDNYTa+5EsIaQt0HcB/MddU8JIYal0G6BDNUCb3HpYYatbA+SNNBSuJoZqo2yceGE+h/dJ76wPtfyi+fYqN6Mk54vm8wVqbCjniO+eOmDE6gc/8MG1PMEVnjhpby76odUGvjvxcq7GC7zuvPXJPjhgfVI1dQM4CXULYv/crqsxH1ykM68IU2FHUW2/oPeI9nuhLrm3936MH6bGNS7WAaeb6NH+JRCLRJ94qghoY
@@ -40,6 +32,7 @@
   <object name="DoorToWarVetRoom" gid="34" x="64" y="80"/>
   <object name="DoorToTeacherRoom" gid="35" x="184" y="96"/>
   <object name="Marketing4" gid="28" x="160" y="72"/>
+  <object gid="41" x="104" y="184"/>
  </objectgroup>
  <objectgroup name="Rooms" width="32" height="32"/>
 </map>

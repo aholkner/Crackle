@@ -112,7 +112,7 @@ module gmp {
             super(world)
             this.canDismiss = true
             this.enableInfo = false
-            this.items = [new MenuItem('< choose target >', 'choose target')]
+            this.items = [new MenuItem('< Choose Target >', 'Choose Target')]
 
             if (targetType == 'AllEnemy')
                 this.slots = world.monsterSlots.filter((slot) => slot.character && !slot.character.dead)

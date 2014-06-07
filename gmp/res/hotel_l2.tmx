@@ -13,17 +13,13 @@
    eJxjYKA96ATiJUC8lAIzYPo7ccivAeK1FJhPqf7BDEbDf2ABtvAvwaO+EoiroewyIC5nID38S/GY30iE/uEEsIU/LFxxAXT54Z7+kdMcLfRjS3OkAEr0d+Jgj4JRAABwTCJ6
   </data>
  </layer>
- <layer name="Sprites" width="24" height="24">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAqGN9AcaAeMgkEHAF40ACo=
-  </data>
- </layer>
  <objectgroup name="NPCs" width="24" height="24">
   <object name="StairsToL3" gid="27" x="80" y="168"/>
   <object name="StairsToL1" gid="29" x="88" y="168"/>
   <object name="Lobbyist2" gid="3" x="104" y="136"/>
   <object name="Lobbyist3" gid="3" x="64" y="136"/>
   <object name="Lobbyist4" gid="3" x="64" y="96"/>
+  <object gid="41" x="88" y="152"/>
  </objectgroup>
  <objectgroup name="Rooms" width="24" height="24">
   <object name="2nd Floor" x="0" y="0" width="192" height="192"/>

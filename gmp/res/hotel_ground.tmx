@@ -16,11 +16,6 @@
    eJxjYBgFo2AUIINOKF0GxOVoYuhqhgpoQOM3Udn8Diqbhw4aaGw+rd0/3AFyXqE2aEBit5Ool5h8ihz3/SSaTyyoA+J6Gpk9CsgHAITICaw=
   </data>
  </layer>
- <layer name="Sprites" width="24" height="24">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAqGN9AcaAeMgkEHAF40ACo=
-  </data>
- </layer>
  <objectgroup name="NPCs" width="24" height="24">
   <object name="StairsToL1" gid="27" x="80" y="168"/>
   <object name="StairsToBasement" gid="29" x="88" y="168"/>
@@ -30,6 +25,7 @@
   <object name="Religious4" gid="5" x="112" y="152"/>
   <object name="TVPersonality" gid="14" x="56" y="104"/>
   <object name="TVDebate" gid="7" x="120" y="48"/>
+  <object gid="41" x="88" y="152"/>
  </objectgroup>
  <objectgroup name="Rooms" width="24" height="24">
   <object name="Ground Floor" x="0" y="0" width="192" height="192"/>

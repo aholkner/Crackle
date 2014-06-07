@@ -16,7 +16,7 @@ module gmp {
         questFlags: {} = {}
         questVars: {} = {}
         questItems: QuestItem[] = []
-        money: number
+        money: number = 0
 
         onPreload() {
             UI.preload()
@@ -42,8 +42,10 @@ module gmp {
             this.player = new Character('Player', 1, [], false)
             this.allies = [this.player]
 
-            this.gotoMap('act1')
-            //this.gotoMap('title')
+            var startMap = document.location.search.substring(1)
+            if (startMap.length == 0)
+                startMap = 'title'
+            this.gotoMap(startMap)
         }
 
         loadCharacterSprites() {

@@ -17,10 +17,22 @@
 
         static load() {
             Resources.titleImage = Resources.loadImage('title.png')
-            Resources.tilemaps['act1'] = Resources.loadTilemap('act1.json')
-            Resources.tilemaps['combat1'] = Resources.loadTilemap('combat1.json')
-            Resources.tilemaps['ui_win_combat'] = Resources.loadTilemap('ui_win_combat.json')
-            Resources.tilemaps['ui_levelup'] = Resources.loadTilemap('ui_levelup.json')
+            var maps = [
+                'act1',
+                'act2',
+                'act3',
+                'act3_basement',
+                'end',
+                'hotel_basement',
+                'hotel_ground',
+                'hotel_l1',
+                'hotel_l2',
+                'combat1',
+                'ui_win_combat',
+                'ui_levelup']
+            maps.forEach((id) => {
+                Resources.tilemaps[id] = Resources.loadTilemap(id + '.json')
+            })
 
             UI.load()
         }
