@@ -87,6 +87,7 @@
             })
 
             this.canvas.addEventListener('touchstart', (ev: any) => {
+                event.preventDefault()
                 if (ev.touches.length > 0)
                     this.onTouch(ev.touches[0].pageX - this.canvas.offsetLeft, ev.touches[0].pageY - this.canvas.offsetTop, ev.touches[0].identifier, true)
             })

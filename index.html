@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=640, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
     <title>Goodnight, Mr President</title>
     <style>
         @font-face {
@@ -16,8 +16,10 @@
         }
 
         body {
-            background: black;
-            color: white
+            background: url(gmp/res/end.png);
+            background-size: 200%;
+            color: white;
+            -webkit-user-select: none
         }
 
         h1 {
@@ -25,15 +27,27 @@
         }
 
         #content {
+            max-width: 100%;
+            width: 640px;
+            height: 480px;
             margin: auto;
-            margin-top: 100px
+        }
+
+        #content > canvas {
+            border-width: 2px;
+            border-style: solid;
+            border-color: lightgray;
         }
     </style>
     <script src="crackle.js"></script>
+    <script>
+        document.addEventListener('touchstart', function (e) {
+            e.preventDefault()
+        });
+    </script>
 </head>
 <body>
     <div id="content"
-         style="width:640px;height:480px"
          data-crackle-game="gmp.Game"></div>
     <!--
     <h1>Crackle Examples</h1>
